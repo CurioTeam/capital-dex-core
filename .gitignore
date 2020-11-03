@@ -1,0 +1,10 @@
+.idea
+
+/node_modules/
+/build/
+/test/
+
+truffle.js
+truffle-config.js
+
+package-lock.json
