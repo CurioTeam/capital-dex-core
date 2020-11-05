@@ -6,7 +6,6 @@ import './UniswapV2Pair.sol';
 contract UniswapV2Factory is IUniswapV2Factory {
     address public override feeTo;
     address public override feeToSetter;
-    address public override migrator;
 
     mapping(address => mapping(address => address)) public override getPair;
     address[] public override allPairs;
@@ -45,11 +44,6 @@ contract UniswapV2Factory is IUniswapV2Factory {
     function setFeeTo(address _feeTo) external override {
         require(msg.sender == feeToSetter, 'UniswapV2: FORBIDDEN');
         feeTo = _feeTo;
-    }
-
-    function setMigrator(address _migrator) external override {
-        require(msg.sender == feeToSetter, 'UniswapV2: FORBIDDEN');
-        migrator = _migrator;
     }
 
     function setFeeToSetter(address _feeToSetter) external override {
