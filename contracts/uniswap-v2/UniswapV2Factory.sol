@@ -8,6 +8,8 @@ contract UniswapV2Factory is IUniswapV2Factory {
     address public override feeToSetter;
     address public override migrator;
 
+    uint public override fee;
+
     mapping(address => mapping(address => address)) public override getPair;
     address[] public override allPairs;
 
@@ -15,6 +17,10 @@ contract UniswapV2Factory is IUniswapV2Factory {
 
     constructor(address _feeToSetter) public {
         feeToSetter = _feeToSetter;
+    }
+
+    function feeInfo() external override view returns (address, uint) {
+        return (feeTo, fee);
     }
 
     function allPairsLength() external override view returns (uint) {
@@ -50,6 +56,12 @@ contract UniswapV2Factory is IUniswapV2Factory {
     function setMigrator(address _migrator) external override {
         require(msg.sender == feeToSetter, 'UniswapV2: FORBIDDEN');
         migrator = _migrator;
+    }
+
+    function setFee(uint _fee) external override {
+        require(msg.sender == feeToSetter, 'UniswapV2: FORBIDDEN');
+        require(_fee <= 1e18, 'UniswapV2: fee must be from 0 to 1e18');
+        fee = _fee;
     }
 
     function setFeeToSetter(address _feeToSetter) external override {
