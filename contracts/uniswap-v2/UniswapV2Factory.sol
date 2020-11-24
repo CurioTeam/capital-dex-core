@@ -13,6 +13,13 @@ contract UniswapV2Factory is IUniswapV2Factory {
     mapping(address => mapping(address => address)) public override getPair;
     address[] public override allPairs;
 
+    // XXX: whitelisted routers
+    mapping(address => bool) public override isRouter;
+    modifier onlyRouter() {
+        require(isRouter[msg.sender], 'UniswapV2: ROUTER PERMISSION DENIED');
+        _;
+    }
+
     event PairCreated(address indexed token0, address indexed token1, address pair, uint);
 
     constructor(address _feeToSetter) public {
@@ -31,7 +38,7 @@ contract UniswapV2Factory is IUniswapV2Factory {
         return keccak256(type(UniswapV2Pair).creationCode);
     }
 
-    function createPair(address tokenA, address tokenB) external override returns (address pair) {
+    function createPair(address tokenA, address tokenB) external override onlyRouter returns (address pair) {
         require(tokenA != tokenB, 'UniswapV2: IDENTICAL_ADDRESSES');
         (address token0, address token1) = tokenA < tokenB ? (tokenA, tokenB) : (tokenB, tokenA);
         require(token0 != address(0), 'UniswapV2: ZERO_ADDRESS');
@@ -62,6 +69,11 @@ contract UniswapV2Factory is IUniswapV2Factory {
         require(msg.sender == feeToSetter, 'UniswapV2: FORBIDDEN');
         require(_fee <= 1e18, 'UniswapV2: fee must be from 0 to 1e18');
         fee = _fee;
+    }
+
+    function setRouterPermission(address _router, bool _permission) external override {
+        require(msg.sender == feeToSetter, 'UniswapV2: FORBIDDEN');
+        isRouter[_router] = _permission;
     }
 
     function setFeeToSetter(address _feeToSetter) external override {

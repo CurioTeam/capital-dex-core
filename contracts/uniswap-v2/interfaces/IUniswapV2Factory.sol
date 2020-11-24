@@ -14,6 +14,8 @@ interface IUniswapV2Factory {
     function allPairs(uint) external view returns (address pair);
     function allPairsLength() external view returns (uint);
 
+    function isRouter(address router) external view returns (bool);
+
     function createPair(address tokenA, address tokenB) external returns (address pair);
 
     function setFeeTo(address) external;
@@ -21,4 +23,5 @@ interface IUniswapV2Factory {
     function setMigrator(address) external;
 
     function setFee(uint) external;
+    function setRouterPermission(address router, bool permission) external;
 }
