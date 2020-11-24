@@ -101,7 +101,7 @@ contract UniswapV2Pair is UniswapV2ERC20 {
     function _mintFee(uint112 _reserve0, uint112 _reserve1) private returns (bool feeOn) {
         // address feeTo = IUniswapV2Factory(factory).feeTo();
         (address feeTo, uint fee) = IUniswapV2Factory(factory).feeInfo();
-        feeOn = feeTo != address(0) && fee > 0 && fee <= WAD;
+        feeOn = feeTo != address(0) && fee > 0 && fee <= 1e18;
         uint _kLast = kLast; // gas savings
         if (feeOn) {
             if (_kLast != 0) {
@@ -111,7 +111,7 @@ contract UniswapV2Pair is UniswapV2ERC20 {
                     uint numerator = totalSupply.mul(rootK.sub(rootKLast));
                     uint denominator = rootK.mul(5).add(rootKLast);
                     uint liquidity = numerator / denominator;
-                    liquidity = wmul(liquidity.mul(6), fee); // WAD == 100% == 6/6 of the growth
+                    liquidity = liquidity.mul(6).wmul(fee); // 1e18 == 100% == 6/6 of the growth
                     if (liquidity > 0) _mint(feeTo, liquidity);
                 }
             }
