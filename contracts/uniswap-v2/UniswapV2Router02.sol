@@ -39,6 +39,16 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         _;
     }
 
+    // XXX: only swap whitelisted
+    modifier tokensWhitelisted(address tokenA, address tokenB) {
+        address whitelist = IUniswapV2Factory(factory).whitelist();
+        if (whitelist != address(0) && IDexWhitelist(whitelist).isTokenWLActive()) {
+            require(IDexWhitelist(whitelist).isTokenWhitelisted(tokenA), 'UniswapV2Router: Token is not whitelisted');
+            require(IDexWhitelist(whitelist).isTokenWhitelisted(tokenB), 'UniswapV2Router: Token is not whitelisted');
+        }
+        _;
+    }
+
     constructor(address _factory, address _WETH) public {
         factory = _factory;
         WETH = _WETH;
@@ -56,7 +66,7 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         uint amountBDesired,
         uint amountAMin,
         uint amountBMin
-    ) internal virtual returns (uint amountA, uint amountB) {
+    ) internal virtual tokensWhitelisted(tokenA, tokenB) onlyLiquidityWhitelisted returns (uint amountA, uint amountB) {
         // create the pair if it doesn't exist yet
         if (IUniswapV2Factory(factory).getPair(tokenA, tokenB) == address(0)) {
             IUniswapV2Factory(factory).createPair(tokenA, tokenB);
@@ -86,7 +96,7 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         uint amountBMin,
         address to,
         uint deadline
-    ) external virtual override ensure(deadline) onlyLiquidityWhitelisted returns (uint amountA, uint amountB, uint liquidity) {
+    ) external virtual override ensure(deadline) returns (uint amountA, uint amountB, uint liquidity) {
         (amountA, amountB) = _addLiquidity(tokenA, tokenB, amountADesired, amountBDesired, amountAMin, amountBMin);
         address pair = UniswapV2Library.pairFor(factory, tokenA, tokenB);
         TransferHelper.safeTransferFrom(tokenA, msg.sender, pair, amountA);
@@ -100,7 +110,7 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         uint amountETHMin,
         address to,
         uint deadline
-    ) external virtual override payable ensure(deadline) onlyLiquidityWhitelisted returns (uint amountToken, uint amountETH, uint liquidity) {
+    ) external virtual override payable ensure(deadline) returns (uint amountToken, uint amountETH, uint liquidity) {
         (amountToken, amountETH) = _addLiquidity(
             token,
             WETH,
