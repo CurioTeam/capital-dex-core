@@ -8,6 +8,8 @@ contract UniswapV2Factory is IUniswapV2Factory {
     address public override feeToSetter;
     address public override migrator;
 
+    address public override whitelist;
+
     uint public override fee;
 
     mapping(address => mapping(address => address)) public override getPair;
@@ -63,6 +65,11 @@ contract UniswapV2Factory is IUniswapV2Factory {
     function setMigrator(address _migrator) external override {
         require(msg.sender == feeToSetter, 'UniswapV2: FORBIDDEN');
         migrator = _migrator;
+    }
+
+    function setWhitelist(address _whitelist) external override {
+        require(msg.sender == feeToSetter, 'UniswapV2: FORBIDDEN');
+        whitelist = _whitelist;
     }
 
     function setFee(uint _fee) external override {

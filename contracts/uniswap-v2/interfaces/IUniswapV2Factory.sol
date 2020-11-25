@@ -7,6 +7,8 @@ interface IUniswapV2Factory {
     function feeToSetter() external view returns (address);
     function migrator() external view returns (address);
 
+    function whitelist() external view returns (address);
+
     function fee() external view returns (uint);
     function feeInfo() external view returns (address feeToAddress, uint feeShare);
 
@@ -24,4 +26,5 @@ interface IUniswapV2Factory {
 
     function setFee(uint) external;
     function setRouterPermission(address router, bool permission) external;
+    function setWhitelist(address) external;
 }

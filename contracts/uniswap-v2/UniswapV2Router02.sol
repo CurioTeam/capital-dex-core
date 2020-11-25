@@ -8,6 +8,7 @@ import './interfaces/IUniswapV2Router02.sol';
 import './interfaces/IUniswapV2Factory.sol';
 import './interfaces/IERC20.sol';
 import './interfaces/IWETH.sol';
+import '../interfaces/IDexWhitelist.sol';
 
 contract UniswapV2Router02 is IUniswapV2Router02 {
     using SafeMathUniswap for uint;
@@ -17,6 +18,24 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
 
     modifier ensure(uint deadline) {
         require(deadline >= block.timestamp, 'UniswapV2Router: EXPIRED');
+        _;
+    }
+
+    // XXX: only liquidity whitelisted
+    modifier onlyLiquidityWhitelisted() {
+        address whitelist = IUniswapV2Factory(factory).whitelist();
+        if (whitelist != address(0) && IDexWhitelist(whitelist).isLiquidityWLActive()) {
+            require(IDexWhitelist(whitelist).isLiquidityWhitelisted(msg.sender), 'UniswapV2Router: WL PERMISSION DENIED');
+        }
+        _;
+    }
+
+    // XXX: only swap whitelisted
+    modifier onlySwapWhitelisted() {
+        address whitelist = IUniswapV2Factory(factory).whitelist();
+        if (whitelist != address(0) && IDexWhitelist(whitelist).isSwapWLActive()) {
+            require(IDexWhitelist(whitelist).isSwapWhitelisted(msg.sender), 'UniswapV2Router: WL PERMISSION DENIED');
+        }
         _;
     }
 
@@ -67,7 +86,7 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         uint amountBMin,
         address to,
         uint deadline
-    ) external virtual override ensure(deadline) returns (uint amountA, uint amountB, uint liquidity) {
+    ) external virtual override ensure(deadline) onlyLiquidityWhitelisted returns (uint amountA, uint amountB, uint liquidity) {
         (amountA, amountB) = _addLiquidity(tokenA, tokenB, amountADesired, amountBDesired, amountAMin, amountBMin);
         address pair = UniswapV2Library.pairFor(factory, tokenA, tokenB);
         TransferHelper.safeTransferFrom(tokenA, msg.sender, pair, amountA);
@@ -81,7 +100,7 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         uint amountETHMin,
         address to,
         uint deadline
-    ) external virtual override payable ensure(deadline) returns (uint amountToken, uint amountETH, uint liquidity) {
+    ) external virtual override payable ensure(deadline) onlyLiquidityWhitelisted returns (uint amountToken, uint amountETH, uint liquidity) {
         (amountToken, amountETH) = _addLiquidity(
             token,
             WETH,
@@ -108,7 +127,7 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         uint amountBMin,
         address to,
         uint deadline
-    ) public virtual override ensure(deadline) returns (uint amountA, uint amountB) {
+    ) public virtual override ensure(deadline) onlyLiquidityWhitelisted returns (uint amountA, uint amountB) {
         address pair = UniswapV2Library.pairFor(factory, tokenA, tokenB);
         IUniswapV2Pair(pair).transferFrom(msg.sender, pair, liquidity); // send liquidity to pair
         (uint amount0, uint amount1) = IUniswapV2Pair(pair).burn(to);
@@ -124,7 +143,7 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         uint amountETHMin,
         address to,
         uint deadline
-    ) public virtual override ensure(deadline) returns (uint amountToken, uint amountETH) {
+    ) public virtual override ensure(deadline) onlyLiquidityWhitelisted returns (uint amountToken, uint amountETH) {
         (amountToken, amountETH) = removeLiquidity(
             token,
             WETH,
@@ -176,7 +195,7 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         uint amountETHMin,
         address to,
         uint deadline
-    ) public virtual override ensure(deadline) returns (uint amountETH) {
+    ) public virtual override ensure(deadline) onlyLiquidityWhitelisted returns (uint amountETH) {
         (, amountETH) = removeLiquidity(
             token,
             WETH,
@@ -227,7 +246,7 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         address[] calldata path,
         address to,
         uint deadline
-    ) external virtual override ensure(deadline) returns (uint[] memory amounts) {
+    ) external virtual override ensure(deadline) onlySwapWhitelisted returns (uint[] memory amounts) {
         amounts = UniswapV2Library.getAmountsOut(factory, amountIn, path);
         require(amounts[amounts.length - 1] >= amountOutMin, 'UniswapV2Router: INSUFFICIENT_OUTPUT_AMOUNT');
         TransferHelper.safeTransferFrom(
@@ -241,7 +260,7 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         address[] calldata path,
         address to,
         uint deadline
-    ) external virtual override ensure(deadline) returns (uint[] memory amounts) {
+    ) external virtual override ensure(deadline) onlySwapWhitelisted returns (uint[] memory amounts) {
         amounts = UniswapV2Library.getAmountsIn(factory, amountOut, path);
         require(amounts[0] <= amountInMax, 'UniswapV2Router: EXCESSIVE_INPUT_AMOUNT');
         TransferHelper.safeTransferFrom(
@@ -255,6 +274,7 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         override
         payable
         ensure(deadline)
+        onlySwapWhitelisted
         returns (uint[] memory amounts)
     {
         require(path[0] == WETH, 'UniswapV2Router: INVALID_PATH');
@@ -269,6 +289,7 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         virtual
         override
         ensure(deadline)
+        onlySwapWhitelisted
         returns (uint[] memory amounts)
     {
         require(path[path.length - 1] == WETH, 'UniswapV2Router: INVALID_PATH');
@@ -286,6 +307,7 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         virtual
         override
         ensure(deadline)
+        onlySwapWhitelisted
         returns (uint[] memory amounts)
     {
         require(path[path.length - 1] == WETH, 'UniswapV2Router: INVALID_PATH');
@@ -304,6 +326,7 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         override
         payable
         ensure(deadline)
+        onlySwapWhitelisted
         returns (uint[] memory amounts)
     {
         require(path[0] == WETH, 'UniswapV2Router: INVALID_PATH');
@@ -342,7 +365,7 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         address[] calldata path,
         address to,
         uint deadline
-    ) external virtual override ensure(deadline) {
+    ) external virtual override ensure(deadline) onlySwapWhitelisted {
         TransferHelper.safeTransferFrom(
             path[0], msg.sender, UniswapV2Library.pairFor(factory, path[0], path[1]), amountIn
         );
@@ -364,6 +387,7 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         override
         payable
         ensure(deadline)
+        onlySwapWhitelisted
     {
         require(path[0] == WETH, 'UniswapV2Router: INVALID_PATH');
         uint amountIn = msg.value;
@@ -387,6 +411,7 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         virtual
         override
         ensure(deadline)
+        onlySwapWhitelisted
     {
         require(path[path.length - 1] == WETH, 'UniswapV2Router: INVALID_PATH');
         TransferHelper.safeTransferFrom(
