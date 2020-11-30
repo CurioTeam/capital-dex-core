@@ -39,13 +39,16 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         _;
     }
 
-    // XXX: only swap whitelisted
-    modifier tokensWhitelisted(address tokenA, address tokenB) {
+    // XXX: only tokens whitelisted
+    function tokensWhitelisted(address tokenA, address tokenB) internal view returns(bool) {
         address whitelist = IUniswapV2Factory(factory).whitelist();
         if (whitelist != address(0) && IDexWhitelist(whitelist).isTokenWLActive()) {
-            require(IDexWhitelist(whitelist).isTokenWhitelisted(tokenA), 'UniswapV2Router: Token is not whitelisted');
-            require(IDexWhitelist(whitelist).isTokenWhitelisted(tokenB), 'UniswapV2Router: Token is not whitelisted');
+            return (IDexWhitelist(whitelist).isTokenWhitelisted(tokenA) && IDexWhitelist(whitelist).isTokenWhitelisted(tokenB));
         }
+        return true;
+    }
+    modifier onlyTokensWhitelisted(address tokenA, address tokenB) {
+        require(tokensWhitelisted(tokenA, tokenB), 'UniswapV2Router: Tokens is not whitelisted');
         _;
     }
 
@@ -59,6 +62,7 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
     }
 
     // **** ADD LIQUIDITY ****
+    // XXX: added liquidity and token whitelists check
     function _addLiquidity(
         address tokenA,
         address tokenB,
@@ -66,7 +70,7 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         uint amountBDesired,
         uint amountAMin,
         uint amountBMin
-    ) internal virtual tokensWhitelisted(tokenA, tokenB) onlyLiquidityWhitelisted returns (uint amountA, uint amountB) {
+    ) internal virtual onlyLiquidityWhitelisted onlyTokensWhitelisted(tokenA, tokenB) returns (uint amountA, uint amountB) {
         // create the pair if it doesn't exist yet
         if (IUniswapV2Factory(factory).getPair(tokenA, tokenB) == address(0)) {
             IUniswapV2Factory(factory).createPair(tokenA, tokenB);
@@ -129,6 +133,7 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
     }
 
     // **** REMOVE LIQUIDITY ****
+    // XXX: added liquidity whitelist check
     function removeLiquidity(
         address tokenA,
         address tokenB,
@@ -153,7 +158,7 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         uint amountETHMin,
         address to,
         uint deadline
-    ) public virtual override ensure(deadline) onlyLiquidityWhitelisted returns (uint amountToken, uint amountETH) {
+    ) public virtual override ensure(deadline) returns (uint amountToken, uint amountETH) {
         (amountToken, amountETH) = removeLiquidity(
             token,
             WETH,
@@ -205,7 +210,7 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         uint amountETHMin,
         address to,
         uint deadline
-    ) public virtual override ensure(deadline) onlyLiquidityWhitelisted returns (uint amountETH) {
+    ) public virtual override ensure(deadline) returns (uint amountETH) {
         (, amountETH) = removeLiquidity(
             token,
             WETH,
@@ -238,9 +243,11 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
 
     // **** SWAP ****
     // requires the initial amount to have already been sent to the first pair
-    function _swap(uint[] memory amounts, address[] memory path, address _to) internal virtual {
+    // XXX: added swap whitelist check
+    function _swap(uint[] memory amounts, address[] memory path, address _to) internal virtual onlySwapWhitelisted {
         for (uint i; i < path.length - 1; i++) {
             (address input, address output) = (path[i], path[i + 1]);
+            require(tokensWhitelisted(input, output), 'UniswapV2Router: Tokens is not whitelisted');  // XXX: added token whitelist check
             (address token0,) = UniswapV2Library.sortTokens(input, output);
             uint amountOut = amounts[i + 1];
             (uint amount0Out, uint amount1Out) = input == token0 ? (uint(0), amountOut) : (amountOut, uint(0));
@@ -256,7 +263,7 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         address[] calldata path,
         address to,
         uint deadline
-    ) external virtual override ensure(deadline) onlySwapWhitelisted returns (uint[] memory amounts) {
+    ) external virtual override ensure(deadline) returns (uint[] memory amounts) {
         amounts = UniswapV2Library.getAmountsOut(factory, amountIn, path);
         require(amounts[amounts.length - 1] >= amountOutMin, 'UniswapV2Router: INSUFFICIENT_OUTPUT_AMOUNT');
         TransferHelper.safeTransferFrom(
@@ -270,7 +277,7 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         address[] calldata path,
         address to,
         uint deadline
-    ) external virtual override ensure(deadline) onlySwapWhitelisted returns (uint[] memory amounts) {
+    ) external virtual override ensure(deadline) returns (uint[] memory amounts) {
         amounts = UniswapV2Library.getAmountsIn(factory, amountOut, path);
         require(amounts[0] <= amountInMax, 'UniswapV2Router: EXCESSIVE_INPUT_AMOUNT');
         TransferHelper.safeTransferFrom(
@@ -284,7 +291,6 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         override
         payable
         ensure(deadline)
-        onlySwapWhitelisted
         returns (uint[] memory amounts)
     {
         require(path[0] == WETH, 'UniswapV2Router: INVALID_PATH');
@@ -299,7 +305,6 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         virtual
         override
         ensure(deadline)
-        onlySwapWhitelisted
         returns (uint[] memory amounts)
     {
         require(path[path.length - 1] == WETH, 'UniswapV2Router: INVALID_PATH');
@@ -317,7 +322,6 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         virtual
         override
         ensure(deadline)
-        onlySwapWhitelisted
         returns (uint[] memory amounts)
     {
         require(path[path.length - 1] == WETH, 'UniswapV2Router: INVALID_PATH');
@@ -336,7 +340,6 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         override
         payable
         ensure(deadline)
-        onlySwapWhitelisted
         returns (uint[] memory amounts)
     {
         require(path[0] == WETH, 'UniswapV2Router: INVALID_PATH');
@@ -351,9 +354,11 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
 
     // **** SWAP (supporting fee-on-transfer tokens) ****
     // requires the initial amount to have already been sent to the first pair
-    function _swapSupportingFeeOnTransferTokens(address[] memory path, address _to) internal virtual {
+    // XXX: added swap whitelist check
+    function _swapSupportingFeeOnTransferTokens(address[] memory path, address _to) internal virtual onlySwapWhitelisted {
         for (uint i; i < path.length - 1; i++) {
             (address input, address output) = (path[i], path[i + 1]);
+            require(tokensWhitelisted(input, output), 'UniswapV2Router: Tokens is not whitelisted');  // XXX: added token whitelist check
             (address token0,) = UniswapV2Library.sortTokens(input, output);
             IUniswapV2Pair pair = IUniswapV2Pair(UniswapV2Library.pairFor(factory, input, output));
             uint amountInput;
@@ -375,7 +380,7 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         address[] calldata path,
         address to,
         uint deadline
-    ) external virtual override ensure(deadline) onlySwapWhitelisted {
+    ) external virtual override ensure(deadline) {
         TransferHelper.safeTransferFrom(
             path[0], msg.sender, UniswapV2Library.pairFor(factory, path[0], path[1]), amountIn
         );
@@ -397,7 +402,6 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         override
         payable
         ensure(deadline)
-        onlySwapWhitelisted
     {
         require(path[0] == WETH, 'UniswapV2Router: INVALID_PATH');
         uint amountIn = msg.value;
@@ -421,7 +425,6 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         virtual
         override
         ensure(deadline)
-        onlySwapWhitelisted
     {
         require(path[path.length - 1] == WETH, 'UniswapV2Router: INVALID_PATH');
         TransferHelper.safeTransferFrom(
