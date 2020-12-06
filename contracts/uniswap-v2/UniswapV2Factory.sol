@@ -5,8 +5,7 @@ import './UniswapV2Pair.sol';
 
 contract UniswapV2Factory is IUniswapV2Factory {
     address public override feeTo;
-    address public override feeToSetter;
-    address public override migrator;
+    address public override owner;
 
     address public override whitelist;
 
@@ -24,8 +23,14 @@ contract UniswapV2Factory is IUniswapV2Factory {
 
     event PairCreated(address indexed token0, address indexed token1, address pair, uint);
 
-    constructor(address _feeToSetter) public {
-        feeToSetter = _feeToSetter;
+    constructor(address _owner) public {
+        owner = _owner;
+    }
+
+    // XXX: owner permission
+    modifier onlyOwner() {
+        require(msg.sender == owner, 'UniswapV2: FORBIDDEN');
+        _;
     }
 
     function feeInfo() external override view returns (address, uint) {
@@ -57,35 +62,30 @@ contract UniswapV2Factory is IUniswapV2Factory {
         emit PairCreated(token0, token1, pair, allPairs.length);
     }
 
-    function setFeeTo(address _feeTo) external override {
-        require(msg.sender == feeToSetter, 'UniswapV2: FORBIDDEN');
+    // XXX: can only be called by the owner.
+    function setFeeTo(address _feeTo) external override onlyOwner {
         feeTo = _feeTo;
     }
 
-    function setMigrator(address _migrator) external override {
-        require(msg.sender == feeToSetter, 'UniswapV2: FORBIDDEN');
-        migrator = _migrator;
-    }
-
-    function setWhitelist(address _whitelist) external override {
-        require(msg.sender == feeToSetter, 'UniswapV2: FORBIDDEN');
+    // XXX: whitelist setter. Can only be called by the owner.
+    function setWhitelist(address _whitelist) external override onlyOwner {
         whitelist = _whitelist;
     }
 
-    function setFee(uint _fee) external override {
-        require(msg.sender == feeToSetter, 'UniswapV2: FORBIDDEN');
+    // XXX: fee setter. Can only be called by the owner.
+    function setFee(uint _fee) external override onlyOwner {
         require(_fee <= 1e18, 'UniswapV2: fee must be from 0 to 1e18');
         fee = _fee;
     }
 
-    function setRouterPermission(address _router, bool _permission) external override {
-        require(msg.sender == feeToSetter, 'UniswapV2: FORBIDDEN');
+    // XXX: router address setter. Can only be called by the owner.
+    function setRouterPermission(address _router, bool _permission) external override onlyOwner {
         isRouter[_router] = _permission;
     }
 
-    function setFeeToSetter(address _feeToSetter) external override {
-        require(msg.sender == feeToSetter, 'UniswapV2: FORBIDDEN');
-        feeToSetter = _feeToSetter;
+    // XXX: new owner setter. Can only be called by the owner.
+    function setOwner(address _owner) external override onlyOwner {
+        owner = _owner;
     }
 
 }

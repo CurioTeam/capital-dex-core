@@ -4,8 +4,7 @@ interface IUniswapV2Factory {
     event PairCreated(address indexed token0, address indexed token1, address pair, uint);
 
     function feeTo() external view returns (address);
-    function feeToSetter() external view returns (address);
-    function migrator() external view returns (address);
+    function owner() external view returns (address);
 
     function whitelist() external view returns (address);
 
@@ -21,8 +20,7 @@ interface IUniswapV2Factory {
     function createPair(address tokenA, address tokenB) external returns (address pair);
 
     function setFeeTo(address) external;
-    function setFeeToSetter(address) external;
-    function setMigrator(address) external;
+    function setOwner(address) external;
 
     function setFee(uint) external;
     function setRouterPermission(address router, bool permission) external;
