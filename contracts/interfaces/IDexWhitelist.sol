@@ -18,6 +18,12 @@ interface IDexWhitelist {
         view
         returns (bool);
 
+    // success if address is in investor WL or swap WL is not active
+    function isFarmAddressActive(address _addr)
+        external
+        view
+        returns (bool);
+
     // success if address is in token WL or token WL is not active
     function isTokenAddressActive(address _addr)
         external

@@ -1,10 +1,12 @@
 pragma solidity 0.6.12;
 
+// import "@openzeppelin/upgrades/contracts/Initializable.sol";
+
 import "./traits/Managed.sol";
 import "./traits/Pausable.sol";
 import "./interfaces/ICarTokenController.sol";
 
-contract DexWhitelist is Managed, Pausable {
+contract DexWhitelist is Initializable, Managed, Pausable {
     // ** STATE VARIABLES **
 
     ICarTokenController public controller;
@@ -23,6 +25,7 @@ contract DexWhitelist is Managed, Pausable {
     // enable/disable whitelists
     bool public isLiquidityWlActive;
     bool public isSwapWlActive;
+    bool public isFarmWlActive;
     bool public isTokenWlActive;
 
     // ** EVENTS **
@@ -40,6 +43,7 @@ contract DexWhitelist is Managed, Pausable {
 
     event SetLiquidityWlActive(bool active);
     event SetSwapWlActive(bool active);
+    event SetFarmWlActive(bool active);
     event SetTokenWlActive(bool active);
 
     event SetTokenAddressActive(address indexed token, bool active);
@@ -74,6 +78,11 @@ contract DexWhitelist is Managed, Pausable {
     // success if address is in investor WL or swap WL is not active
     function isSwapAddressActive(address _addr) public view returns (bool) {
         return !isSwapWlActive || isInvestorAddressActive(_addr);
+    }
+
+    // success if address is in investor WL or farm WL is not active
+    function isFarmAddressActive(address _addr) public view returns (bool) {
+        return !isFarmWlActive || isInvestorAddressActive(_addr);
     }
 
     // success if address is in token WL or token WL is not active
@@ -170,6 +179,10 @@ contract DexWhitelist is Managed, Pausable {
         _setSwapWlActive(_active);
     }
 
+    function setFarmWlActive(bool _active) external onlyOwner {
+        _setFarmWlActive(_active);
+    }
+
     function setTokenWlActive(bool _active) external onlyOwner {
         _setTokenWlActive(_active);
     }
@@ -178,10 +191,12 @@ contract DexWhitelist is Managed, Pausable {
     function setWlActive(
         bool _liquidityWlActive,
         bool _swapWlActive,
+        bool _farmWlActive,
         bool _tokenWlActive
     ) external onlyOwner {
         _setLiquidityWlActive(_liquidityWlActive);
         _setSwapWlActive(_swapWlActive);
+        _setFarmWlActive(_farmWlActive);
         _setTokenWlActive(_tokenWlActive);
     }
 
@@ -227,6 +242,11 @@ contract DexWhitelist is Managed, Pausable {
     function _setSwapWlActive(bool _active) internal {
         isSwapWlActive = _active;
         emit SetSwapWlActive(_active);
+    }
+
+    function _setFarmWlActive(bool _active) internal {
+        isFarmWlActive = _active;
+        emit SetFarmWlActive(_active);
     }
 
     function _setTokenWlActive(bool _active) internal {
