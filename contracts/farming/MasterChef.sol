@@ -74,6 +74,9 @@ contract MasterChef is Ownable {
     // XXX: user whitelist
     IDexWhitelist public whitelist;
 
+    // XXX: checking already added LP tokens
+    mapping(address => bool) private lpTokens;
+
     event Deposit(address indexed user, uint256 indexed pid, uint256 amount);
     event Withdraw(address indexed user, uint256 indexed pid, uint256 amount);
     event EmergencyWithdraw(address indexed user, uint256 indexed pid, uint256 amount);
@@ -96,7 +99,7 @@ contract MasterChef is Ownable {
     // XXX: only farm whitelisted
     modifier onlyWhitelisted() {
         if (address(whitelist) != address(0)) {
-            require(whitelist.isFarmAddressActive(msg.sender), 'MasterChef: WL PERMISSION DENIED');
+            require(whitelist.isFarmAddressActive(msg.sender), "MasterChef: WL permission denied");
         }
         _;
     }
@@ -106,8 +109,11 @@ contract MasterChef is Ownable {
     }
 
     // Add a new lp to the pool. Can only be called by the owner.
-    // XXX DO NOT add the same LP token more than once. Rewards will be messed up if you do.
     function add(uint256 _allocPoint, IERC20 _lpToken, bool _withUpdate) public onlyOwner {
+        // XXX: trying to add the same LP token more than once
+        require(!lpTokens[address(_lpToken)], "MasterChef: LP token has already been added");
+        lpTokens[address(_lpToken)] = true;
+
         if (_withUpdate) {
             massUpdatePools();
         }
