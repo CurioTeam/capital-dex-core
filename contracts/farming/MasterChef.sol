@@ -6,6 +6,16 @@ import "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
+import "../interfaces/IDexWhitelist.sol";
+
+/**
+ *  original source code: https://github.com/sushiswap/sushiswap/blob/1e4db47fa313f84cd242e17a4972ec1e9755609a/contracts/MasterChef.sol
+ *  XXX: Removed migration logic;
+ *  XXX: Removed token minting; 
+ *  XXX: Removed devaddr for reward;
+ *  XXX: Added whitelist from DexWhitelist;
+ *  XXX: sushi == farming CGT token.
+ */
 
 // MasterChef is the master of Sushi. He can make Sushi and he is a fair guy.
 //
@@ -61,20 +71,34 @@ contract MasterChef is Ownable {
     // The block number when SUSHI mining starts.
     uint256 public startBlock;
 
+    // XXX: user whitelist
+    IDexWhitelist public whitelist;
+
     event Deposit(address indexed user, uint256 indexed pid, uint256 amount);
     event Withdraw(address indexed user, uint256 indexed pid, uint256 amount);
     event EmergencyWithdraw(address indexed user, uint256 indexed pid, uint256 amount);
+    event SetWhitelist(address whitelist);  // XXX: set whitelist event
 
     constructor(
         IERC20 _sushi,
         uint256 _sushiPerBlock,
         uint256 _startBlock,
-        uint256 _bonusEndBlock
+        uint256 _bonusEndBlock,
+        IDexWhitelist _whitelist
     ) public {
         sushi = _sushi;
         sushiPerBlock = _sushiPerBlock;
         bonusEndBlock = _bonusEndBlock;
         startBlock = _startBlock;
+        whitelist = _whitelist; // XXX: set whitelist address
+    }
+
+    // XXX: only farm whitelisted
+    modifier onlyWhitelisted() {
+        if (address(whitelist) != address(0)) {
+            require(whitelist.isFarmAddressActive(msg.sender), 'MasterChef: WL PERMISSION DENIED');
+        }
+        _;
     }
 
     function poolLength() external view returns (uint256) {
@@ -104,6 +128,12 @@ contract MasterChef is Ownable {
         }
         totalAllocPoint = totalAllocPoint.sub(poolInfo[_pid].allocPoint).add(_allocPoint);
         poolInfo[_pid].allocPoint = _allocPoint;
+    }
+
+    // XXX: set whitelist. Can only be called by the owner.
+    function setWhitelist(IDexWhitelist _whitelist) public onlyOwner {
+        whitelist = _whitelist;
+        emit SetWhitelist(address(_whitelist));
     }
 
     // Return reward multiplier over the given _from to _to block.
@@ -158,8 +188,9 @@ contract MasterChef is Ownable {
         pool.lastRewardBlock = block.number;
     }
 
+    // XXX: added whitelist check.
     // Deposit LP tokens to MasterChef for SUSHI allocation.
-    function deposit(uint256 _pid, uint256 _amount) public {
+    function deposit(uint256 _pid, uint256 _amount) public onlyWhitelisted {
         PoolInfo storage pool = poolInfo[_pid];
         UserInfo storage user = userInfo[_pid][msg.sender];
         updatePool(_pid);
@@ -177,8 +208,9 @@ contract MasterChef is Ownable {
         emit Deposit(msg.sender, _pid, _amount);
     }
 
+    // XXX: added whitelist check.
     // Withdraw LP tokens from MasterChef.
-    function withdraw(uint256 _pid, uint256 _amount) public {
+    function withdraw(uint256 _pid, uint256 _amount) public onlyWhitelisted {
         PoolInfo storage pool = poolInfo[_pid];
         UserInfo storage user = userInfo[_pid][msg.sender];
         require(user.amount >= _amount, "withdraw: not good");
@@ -195,8 +227,9 @@ contract MasterChef is Ownable {
         emit Withdraw(msg.sender, _pid, _amount);
     }
 
+    // XXX: added whitelist check.
     // Withdraw without caring about rewards. EMERGENCY ONLY.
-    function emergencyWithdraw(uint256 _pid) public {
+    function emergencyWithdraw(uint256 _pid) public onlyWhitelisted {
         PoolInfo storage pool = poolInfo[_pid];
         UserInfo storage user = userInfo[_pid][msg.sender];
         uint256 amount = user.amount;
