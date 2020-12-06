@@ -1,5 +1,7 @@
 pragma solidity 0.6.12;
 
+// import "@openzeppelin/upgrades/contracts/Initializable.sol";
+
 import "./Administrated.sol";
 
 /**
@@ -11,7 +13,7 @@ import "./Administrated.sol";
  * the functions of your contract. Note that they will not be pausable by
  * simply including this module, only once the modifiers are put in place.
  */
-contract Pausable is Administrated {
+contract Pausable is Initializable, Administrated {
     /**
      * @dev Emitted when the pause is triggered by an admin (`account`).
      */

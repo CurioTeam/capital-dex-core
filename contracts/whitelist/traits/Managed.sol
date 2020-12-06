@@ -1,8 +1,10 @@
 pragma solidity 0.6.12;
 
+// import "@openzeppelin/upgrades/contracts/Initializable.sol";
+
 import "./Administrated.sol";
 
-contract Managed is Administrated {
+contract Managed is Initializable, Administrated {
     using EnumerableSet for EnumerableSet.AddressSet;
 
     // ** EVENTS **
