@@ -24,8 +24,8 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
     // XXX: only liquidity whitelisted
     modifier onlyLiquidityWhitelisted() {
         address whitelist = IUniswapV2Factory(factory).whitelist();
-        if (whitelist != address(0) && IDexWhitelist(whitelist).isLiquidityWLActive()) {
-            require(IDexWhitelist(whitelist).isLiquidityWhitelisted(msg.sender), 'UniswapV2Router: WL PERMISSION DENIED');
+        if (whitelist != address(0)) {
+            require(IDexWhitelist(whitelist).isLiquidityAddressActive(msg.sender), 'UniswapV2Router: WL PERMISSION DENIED');
         }
         _;
     }
@@ -33,8 +33,8 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
     // XXX: only swap whitelisted
     modifier onlySwapWhitelisted() {
         address whitelist = IUniswapV2Factory(factory).whitelist();
-        if (whitelist != address(0) && IDexWhitelist(whitelist).isSwapWLActive()) {
-            require(IDexWhitelist(whitelist).isSwapWhitelisted(msg.sender), 'UniswapV2Router: WL PERMISSION DENIED');
+        if (whitelist != address(0)) {
+            require(IDexWhitelist(whitelist).isSwapAddressActive(msg.sender), 'UniswapV2Router: WL PERMISSION DENIED');
         }
         _;
     }
@@ -42,8 +42,8 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
     // XXX: only tokens whitelisted
     function tokensWhitelisted(address tokenA, address tokenB) internal view returns(bool) {
         address whitelist = IUniswapV2Factory(factory).whitelist();
-        if (whitelist != address(0) && IDexWhitelist(whitelist).isTokenWLActive()) {
-            return (IDexWhitelist(whitelist).isTokenWhitelisted(tokenA) && IDexWhitelist(whitelist).isTokenWhitelisted(tokenB));
+        if (whitelist != address(0)) {
+            return IDexWhitelist(whitelist).isTokenAddressActive(tokenA) && IDexWhitelist(whitelist).isTokenAddressActive(tokenB);
         }
         return true;
     }
