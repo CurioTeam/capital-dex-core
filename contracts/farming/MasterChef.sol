@@ -6,14 +6,16 @@ import "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
+import "./interfaces/IReservoir.sol";
 import "../interfaces/IDexWhitelist.sol";
 
 /**
  *  original source code: https://github.com/sushiswap/sushiswap/blob/1e4db47fa313f84cd242e17a4972ec1e9755609a/contracts/MasterChef.sol
  *  XXX: Removed migration logic;
- *  XXX: Removed token minting; 
+ *  XXX: Removed token minting and added token reservoir; 
  *  XXX: Removed devaddr for reward;
  *  XXX: Added whitelist from DexWhitelist;
+ *  XXX: Added check if LP token has already been added;
  *  XXX: sushi == farming CGT token.
  */
 
@@ -74,22 +76,29 @@ contract MasterChef is Ownable {
     // XXX: user whitelist
     IDexWhitelist public whitelist;
 
+    // XXX: token reservoir
+    IReservoir public sushiReservoir;
+
     // XXX: checking already added LP tokens
     mapping(address => bool) private lpTokens;
 
     event Deposit(address indexed user, uint256 indexed pid, uint256 amount);
     event Withdraw(address indexed user, uint256 indexed pid, uint256 amount);
     event EmergencyWithdraw(address indexed user, uint256 indexed pid, uint256 amount);
-    event SetWhitelist(address whitelist);  // XXX: set whitelist event
+
+    event SetWhitelist(address whitelist);      // XXX: set whitelist event
+    event SetSushiReservoir(address reservoir); // XXX: set reservoir event
 
     constructor(
         IERC20 _sushi,
+        IReservoir _sushiReservoir,
         uint256 _sushiPerBlock,
         uint256 _startBlock,
         uint256 _bonusEndBlock,
         IDexWhitelist _whitelist
     ) public {
         sushi = _sushi;
+        sushiReservoir = _sushiReservoir;   // XXX: set token reservoir
         sushiPerBlock = _sushiPerBlock;
         bonusEndBlock = _bonusEndBlock;
         startBlock = _startBlock;
@@ -142,6 +151,12 @@ contract MasterChef is Ownable {
         emit SetWhitelist(address(_whitelist));
     }
 
+    // XXX: set sushiReservoir. Can only be called by the owner.
+    function setSushiReservoir(IReservoir _sushiReservoir) public onlyOwner {
+        sushiReservoir = _sushiReservoir;
+        emit SetSushiReservoir(address(_sushiReservoir));
+    }
+
     // Return reward multiplier over the given _from to _to block.
     function getMultiplier(uint256 _from, uint256 _to) public view returns (uint256) {
         if (_to <= bonusEndBlock) {
@@ -190,6 +205,7 @@ contract MasterChef is Ownable {
         }
         uint256 multiplier = getMultiplier(pool.lastRewardBlock, block.number);
         uint256 sushiReward = multiplier.mul(sushiPerBlock).mul(pool.allocPoint).div(totalAllocPoint);
+        sushiReward = sushiReservoir.drip(sushiReward); // XXX: transfer tokens from sushiReservoir
         pool.accSushiPerShare = pool.accSushiPerShare.add(sushiReward.mul(1e12).div(lpSupply));
         pool.lastRewardBlock = block.number;
     }
