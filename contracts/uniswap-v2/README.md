@@ -6,3 +6,4 @@ Code from [Uniswap V2](https://github.com/Uniswap/uniswap-v2-core/tree/27f6354ba
 2. Rename `feeToSetter` to `owner`.
 3. Add `setFee`, `setWhitelist`, `setRouterPermission` logic in `UniswapV2Factory` which can be set by `owner`.
 4. Only whitelisted `UniswapV2Router02` can call `UniswapV2Factory` and `UniswapV2Pair`.
+5. Add whitelist logic in `UniswapV2Router02`.
