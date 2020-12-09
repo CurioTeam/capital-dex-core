@@ -2,13 +2,35 @@
   "name": "capital-dex-core",
   "version": "1.0.0",
   "description": "Capital Dex Core smart contracts",
-  "main": "index.js",
+  "author": "Curio Capital AG",
   "license": "MIT",
+  "directories": {
+    "test": "test"
+  },
+  "engines": {
+    "node": "^14.15.0"
+  },
+  "repository": "https://github.com/CurioTeam/capital-dex-core",
+  "scripts": {
+    "compile": "truffle compile",
+    "deploy": "truffle migrate --network local",
+    "test": "truffle compile && mocha --exit --recursive test --timeout 10000",
+    "test:truffle": "truffle test --network test"
+  },
   "dependencies": {
-    "@openzeppelin/contracts": "^3.2.0",
+    "@openzeppelin/contracts": "^3.3.0",
     "@openzeppelin/contracts-ethereum-package": "^3.0.0",
-    "@openzeppelin/upgrades": "^2.8.0",
-    "truffle": "^5.1.44",
-    "truffle-flattener": "^1.4.4"
+    "@openzeppelin/upgrades": "^2.8.0"
+  },
+  "devDependencies": {
+    "@openzeppelin/test-environment": "^0.1.8",
+    "@openzeppelin/test-helpers": "^0.5.9",
+    "@truffle/hdwallet-provider": "^1.2.0",
+    "chai": "^4.2.0",
+    "dotenv": "^8.2.0",
+    "mocha": "^8.2.1",
+    "truffle": "^5.1.56",
+    "truffle-flattener": "^1.5.0",
+    "web3": "^1.3.0"
   }
 }
