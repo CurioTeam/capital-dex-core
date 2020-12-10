@@ -16,6 +16,7 @@ const { utf8ToHex } = web3.utils;
 // const bytes32 = utf8ToHex;
 
 const DexWhitelist = contract.fromArtifact('DexWhitelist');
+const CarTokenController = contract.fromArtifact('CarTokenControllerMock');
 
 describe('Contract whitelist/DexWhitelist.sol', function () {
     const [
@@ -23,7 +24,6 @@ describe('Contract whitelist/DexWhitelist.sol', function () {
         admin,
         manager,
         anyone,
-        carTokenController,
         token,
         token2,
         user,
@@ -31,11 +31,7 @@ describe('Contract whitelist/DexWhitelist.sol', function () {
     ] = accounts;
 
     const deployCarTokenController = async () => {
-        // TODO: add deploy logic
-
-        return {
-            address: carTokenController,
-        }
+        return CarTokenController.new();
     };
 
     beforeEach(async function () {
@@ -278,12 +274,14 @@ describe('Contract whitelist/DexWhitelist.sol', function () {
                 [this.users.alice.address],
                 { from: admin });
         });
+
         it('should add user to whitelist by manager', async function () {
             await this.dexWhitelist.addNewInvestors(
                 [this.users.alice.key],
                 [this.users.alice.address],
                 { from: manager });
         });
+
         it('should fail on add user to whitelist by anyone', async function () {
             await expectRevert(
                 this.dexWhitelist.addNewInvestors(
@@ -332,8 +330,6 @@ describe('Contract whitelist/DexWhitelist.sol', function () {
                 'Investor does not exists'
             );
         });
-
-        // todo: _setInvestorAddress Address already claimed (??? how to test)
 
         context('with user added to wl', function () {
             beforeEach(async function() {
@@ -491,21 +487,117 @@ describe('Contract whitelist/DexWhitelist.sol', function () {
             });
         });
 
-        /*
         context('with user added to car token controller wl', function () {
             beforeEach(async function() {
-                // TODO: add user to controller wl
+                this.carTokenController = await deployCarTokenController();
+
+                await this.dexWhitelist.setController(this.carTokenController.address, {
+                    from: owner
+                });
+
+                await this.carTokenController.addUserToWhitelist(user);
             });
 
             it('should return correct status of user (true)', async function () {
                 (await this.dexWhitelist.isInvestorAddressActive(user)).should.be.equal(true);
             });
-        });
-         */
 
+            it('should return false status of user after delete from car token controller wl', async function () {
+                await this.carTokenController.removeUserFromWhitelist(user);
+
+                (await this.dexWhitelist.isInvestorAddressActive(user)).should.be.equal(false);
+            });
+        });
     });
 
-    describe('users whitelisted statuses per operation', function () {
-        // TODO: add tests
+    describe('users whitelisted statuses per each of 3 operations (all wl manual enabled after start)', function () {
+        beforeEach(async function() {
+            this.users = {
+                alice: {
+                    key: utf8ToHex('alice'),
+                    keyNormalize: utf8ToHex('alice').padEnd(66, '0'),
+                    address: user,
+                },
+                bob: {
+                    key: utf8ToHex('bob'),
+                    keyNormalize: utf8ToHex('bob').padEnd(66, '0'),
+                    address: user2,
+                }
+            };
+
+            await this.dexWhitelist['setLiquidityWlActive'](true, { from: owner });
+            await this.dexWhitelist['setSwapWlActive'](true, { from: owner });
+            await this.dexWhitelist['setFarmWlActive'](true, { from: owner });
+
+            await this.dexWhitelist.addNewInvestors(
+                [this.users.alice.key],
+                [this.users.alice.address],
+                { from: admin });
+        });
+
+        it('should be success for whitelisted user', async function() {
+            (await this.dexWhitelist.isLiquidityAddressActive(user)).should.be.equal(true);
+            (await this.dexWhitelist.isSwapAddressActive(user)).should.be.equal(true);
+            (await this.dexWhitelist.isFarmAddressActive(user)).should.be.equal(true);
+        });
+
+        it('should be false for not whitelisted user', async function() {
+            (await this.dexWhitelist.isLiquidityAddressActive(user2)).should.be.equal(false);
+            (await this.dexWhitelist.isSwapAddressActive(user2)).should.be.equal(false);
+            (await this.dexWhitelist.isFarmAddressActive(user2)).should.be.equal(false);
+        });
+
+        context('when users wl disabled', function () {
+            beforeEach(async function() {
+                await this.dexWhitelist['setLiquidityWlActive'](false, { from: owner });
+                await this.dexWhitelist['setSwapWlActive'](false, { from: owner });
+                await this.dexWhitelist['setFarmWlActive'](false, { from: owner });
+             });
+
+            it('should be success for whitelisted user', async function() {
+                (await this.dexWhitelist.isLiquidityAddressActive(user)).should.be.equal(true);
+                (await this.dexWhitelist.isSwapAddressActive(user)).should.be.equal(true);
+                (await this.dexWhitelist.isFarmAddressActive(user)).should.be.equal(true);
+            });
+
+            it('should be success for whitelisted user', async function() {
+                (await this.dexWhitelist.isLiquidityAddressActive(user2)).should.be.equal(true);
+                (await this.dexWhitelist.isSwapAddressActive(user2)).should.be.equal(true);
+                (await this.dexWhitelist.isFarmAddressActive(user2)).should.be.equal(true);
+            });
+        });
+    });
+
+    describe('tokens whitelisted statuses per operation (wl manual enabled after start)', function () {
+        beforeEach(async function() {
+            await this.dexWhitelist['setTokenWlActive'](true, { from: owner });
+
+            await this.dexWhitelist.setTokenAddressActive(token, true, {
+                from: admin
+            });
+        });
+
+        it('should be success for whitelisted token', async function() {
+            (await this.dexWhitelist.isTokenAddressActive(token)).should.be.equal(true);
+        });
+
+        it('should be false for not whitelisted token', async function() {
+            (await this.dexWhitelist.isTokenAddressActive(token2)).should.be.equal(false);
+        });
+
+        context('when token wl disabled', function () {
+            beforeEach(async function() {
+                await this.dexWhitelist['setTokenWlActive'](false, { from: owner });
+            });
+
+            it('should be success for whitelisted token', async function() {
+                (await this.dexWhitelist.isTokenAddressActive(token)).should.be.equal(true);
+            });
+
+            it('should be success for not whitelisted token', async function() {
+                (await this.dexWhitelist.isTokenAddressActive(token2)).should.be.equal(true);
+            });
+
+        });
     });
 });
