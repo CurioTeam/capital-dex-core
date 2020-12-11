@@ -1,27 +1,14 @@
 pragma solidity 0.6.12;
 
-// import "@openzeppelin/upgrades/contracts/Initializable.sol";
-
 import "./Administrated.sol";
 
 /**
- * @dev Contract module which allows children to implement an emergency stop
- * mechanism that can be triggered by an authorized account.
+ * @title Pausable
  *
- * This module is used through inheritance. It will make available the
- * modifiers `whenNotPaused` and `whenPaused`, which can be applied to
- * the functions of your contract. Note that they will not be pausable by
- * simply including this module, only once the modifiers are put in place.
+ * @dev Contract provides a stop emergency mechanism.
  */
 contract Pausable is Initializable, Administrated {
-    /**
-     * @dev Emitted when the pause is triggered by an admin (`account`).
-     */
     event Paused(address admin);
-
-    /**
-     * @dev Emitted when the pause is lifted by an admin (`account`).
-     */
     event Unpaused(address admin);
 
     bool private _paused;
@@ -50,7 +37,9 @@ contract Pausable is Initializable, Administrated {
     }
 
     /**
-     * @dev Called by a pauser to pause, triggers stopped state.
+     * @dev Allows the owner to pause, triggers stopped state.
+     *
+     * Emits a {Paused} event with `admin` set to admin who paused it.
      */
     function pause() public onlyAdmin whenNotPaused {
         _paused = true;
@@ -58,7 +47,9 @@ contract Pausable is Initializable, Administrated {
     }
 
     /**
-     * @dev Called by a pauser to unpause, returns to normal state.
+     * @dev Allows the owner to do unpause, returns to normal state.
+     *
+     * Emits a {Unpaused} event with `admin` set to admin who unpaused it.
      */
     function unpause() public onlyAdmin whenPaused {
         _paused = false;
