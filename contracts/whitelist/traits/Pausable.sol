@@ -1,15 +1,15 @@
 pragma solidity 0.6.12;
 
-import "./Administrated.sol";
+import "@openzeppelin/contracts-ethereum-package/contracts/access/Ownable.sol";
 
 /**
  * @title Pausable
  *
  * @dev Contract provides a stop emergency mechanism.
  */
-contract Pausable is Initializable, Administrated {
-    event Paused(address admin);
-    event Unpaused(address admin);
+contract Pausable is Initializable, OwnableUpgradeSafe {
+    event Paused();
+    event Unpaused();
 
     bool private _paused;
 
@@ -39,20 +39,20 @@ contract Pausable is Initializable, Administrated {
     /**
      * @dev Allows the owner to pause, triggers stopped state.
      *
-     * Emits a {Paused} event with `admin` set to admin who paused it.
+     * Emits a {Paused} event.
      */
-    function pause() public onlyAdmin whenNotPaused {
+    function pause() public onlyOwner whenNotPaused {
         _paused = true;
-        emit Paused(msg.sender);
+        emit Paused();
     }
 
     /**
      * @dev Allows the owner to do unpause, returns to normal state.
      *
-     * Emits a {Unpaused} event with `admin` set to admin who unpaused it.
+     * Emits a {Unpaused} event.
      */
-    function unpause() public onlyAdmin whenPaused {
+    function unpause() public onlyOwner whenPaused {
         _paused = false;
-        emit Unpaused(msg.sender);
+        emit Unpaused();
     }
 }

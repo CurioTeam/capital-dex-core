@@ -12,12 +12,12 @@ require('chai').should();
 const Pausable = contract.fromArtifact('PausableMock');
 
 describe('Contract whitelist/traits/Pausable.sol', function () {
-    const [ admin, anyone ] = accounts;
+    const [ owner, anyone ] = accounts;
 
     beforeEach(async function () {
         this.pausable = await deployProxy(Pausable);
 
-        await this.pausable.addAdmin(admin, { from: defaultSender });
+        await this.pausable.transferOwnership(owner, { from: defaultSender });
     });
 
     it('should initialize with unpaused state', async function() {
@@ -27,17 +27,17 @@ describe('Contract whitelist/traits/Pausable.sol', function () {
     it('should fail on pause by anyone', async function() {
         await expectRevert(
             this.pausable.pause({ from: anyone }),
-            'Administrated: sender is not admin'
+            'Ownable: caller is not the owner'
         );
     });
 
-    it('should pause by admin', async function() {
-        await this.pausable.pause({ from: admin });
+    it('should pause by owner', async function() {
+        await this.pausable.pause({ from: owner });
     });
 
     context('when paused', function() {
         beforeEach(async function() {
-            ({ logs: this.logs } = await this.pausable.pause({ from: admin }));
+            ({ logs: this.logs } = await this.pausable.pause({ from: owner }));
         });
 
         it('should be paused', async function() {
@@ -45,14 +45,12 @@ describe('Contract whitelist/traits/Pausable.sol', function () {
         });
 
         it('should log pause event', async function() {
-            expectEvent.inLogs(this.logs, 'Paused', {
-                admin
-            });
+            expectEvent.inLogs(this.logs, 'Paused');
         });
 
         it('should fail on pause', async function() {
             await expectRevert(
-                this.pausable.pause({ from: admin }),
+                this.pausable.pause({ from: owner }),
                 'Pausable: paused'
             );
         });
@@ -71,17 +69,17 @@ describe('Contract whitelist/traits/Pausable.sol', function () {
         it('should fail on unpause by anyone', async function() {
             await expectRevert(
                 this.pausable.unpause({ from: anyone }),
-                'Administrated: sender is not admin'
+                'Ownable: caller is not the owner'
             );
         });
 
-        it('should unpause by admin', async function() {
-            await this.pausable.unpause({ from: admin });
+        it('should unpause by owner', async function() {
+            await this.pausable.unpause({ from: owner });
         });
 
         context('when unpaused', function() {
             beforeEach(async function() {
-                ({ logs: this.logs } = await this.pausable.unpause({ from: admin }));
+                ({ logs: this.logs } = await this.pausable.unpause({ from: owner }));
             });
 
             it('should be unpaused', async function() {
@@ -89,14 +87,12 @@ describe('Contract whitelist/traits/Pausable.sol', function () {
             });
 
             it('should log unpause event', async function() {
-                expectEvent.inLogs(this.logs, 'Unpaused', {
-                    admin
-                });
+                expectEvent.inLogs(this.logs, 'Unpaused');
             });
 
             it('should fail on unpause', async function() {
                 await expectRevert(
-                    this.pausable.unpause({ from: admin }),
+                    this.pausable.unpause({ from: owner }),
                     'Pausable: not paused'
                 );
             });

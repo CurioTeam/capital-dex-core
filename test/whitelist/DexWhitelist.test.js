@@ -464,7 +464,7 @@ describe('Contract whitelist/DexWhitelist.sol', function () {
             });
 
             it('should fail on change user by user when paused', async function () {
-                await this.dexWhitelist.pause({ from: admin });
+                await this.dexWhitelist.pause({ from: owner });
 
                 await expectRevert(
                     this.dexWhitelist.changeMyAddress(
