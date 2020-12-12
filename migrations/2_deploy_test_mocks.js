@@ -1,30 +1,34 @@
 const {
     BN,
     ether,
-} = require('@openzeppelin/test-helpers');
+} = require("@openzeppelin/test-helpers");
 
 const ERC20Mock = artifacts.require("ERC20FixedSupplyMock.sol");
-const TokenFaucet = artifacts.require('TokenFaucet');
+const TokenFaucet = artifacts.require("TokenFaucet");
 
 // tCGT params
 const tCGTName = "tCGT";
 const tCGTSymbol = "tCGT";
 const tCGTSupply = ether(new BN(1e8));  // 100M
+const tCGTFaucetAmt = ether("200");     // 200
 
 // tCSC params
 const tCSCName = "tCSC";
 const tCSCSymbol = "tCSC";
 const tCSCSupply = ether(new BN(1e8));  // 100M
+const tCSCFaucetAmt = ether("200");     // 200
 
 // tCUR params
 const tCURName = "tCUR";
 const tCURSymbol = "tCUR";
 const tCURSupply = ether(new BN(2e6));  // 2M
+const tCURFaucetAmt = ether("200");     // 200
 
 // tDAI params
 const tDAIName = "tDAI";
 const tDAISymbol = "tDAI";
 const tDAISupply = ether(new BN(1e8));  // 100M
+const tDAIFaucetAmt = ether("200");     // 200
 
 const faucetOwner = "0xB844C65F3E161061bA5D5dD8497B3C04B71c4c83";
 
@@ -52,6 +56,12 @@ module.exports = async function(deployer) {
     // deploy TokenFaucet
 	let tokenFaucet = await deployer.deploy(TokenFaucet);
     console.log("TokenFaucet address: ", tokenFaucet.address);
+
+    // set faucet gulp amount for test tokens
+    tokenFaucet.setAmt(tCGT.address, tCGTFaucetAmt);
+    tokenFaucet.setAmt(tCSC.address, tCSCFaucetAmt);
+    tokenFaucet.setAmt(tCUR.address, tCURFaucetAmt);
+    tokenFaucet.setAmt(tDAI.address, tDAIFaucetAmt);
 
     // transfer faucet ownership to new owner
     await tokenFaucet.transferOwnership(faucetOwner);
