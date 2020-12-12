@@ -10,25 +10,25 @@ const TokenFaucet = artifacts.require("TokenFaucet");
 const tCGTName = "tCGT";
 const tCGTSymbol = "tCGT";
 const tCGTSupply = ether(new BN(1e8));  // 100M
-const tCGTFaucetAmt = ether("1000");     // 1000
+const tCGTFaucetAmt = ether("1000");    // 1000
 
 // tCSC params
 const tCSCName = "tCSC";
 const tCSCSymbol = "tCSC";
 const tCSCSupply = ether(new BN(1e8));  // 100M
-const tCSCFaucetAmt = ether("1000");     // 1000
+const tCSCFaucetAmt = ether("1000");    // 1000
 
 // tCUR params
 const tCURName = "tCUR";
 const tCURSymbol = "tCUR";
 const tCURSupply = ether(new BN(2e6));  // 2M
-const tCURFaucetAmt = ether("1000");     // 1000
+const tCURFaucetAmt = ether("1000");    // 1000
 
 // tDAI params
 const tDAIName = "tDAI";
 const tDAISymbol = "tDAI";
 const tDAISupply = ether(new BN(1e8));  // 100M
-const tDAIFaucetAmt = ether("1000");     // 1000
+const tDAIFaucetAmt = ether("1000");    // 1000
 
 const faucetOwner = "0xB844C65F3E161061bA5D5dD8497B3C04B71c4c83";
 
