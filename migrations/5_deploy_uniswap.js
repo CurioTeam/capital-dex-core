@@ -2,11 +2,8 @@ const fs = require("fs");
 const path = require("path");
 
 const {
-    ether,
-    constants,
+    ether
 } = require("@openzeppelin/test-helpers");
-
-const { ZERO_ADDRESS } = constants;
 
 const UniswapFactory = artifacts.require("UniswapV2Factory.sol");
 const UniswapRouter = artifacts.require("UniswapV2Router02.sol");
@@ -18,7 +15,7 @@ const owner = "0xB844C65F3E161061bA5D5dD8497B3C04B71c4c83";
 const feeToAddress = "0xB844C65F3E161061bA5D5dD8497B3C04B71c4c83";
 const fee = ether("0.1");  // 10%
 
-const dexWhitelistAddress = "0x56D11549597a6685D48CFE9B571A66F7b819B9D9";
+const dexWhitelistAddress = "0xC8A46b066BC148E08c80cfc6638Ea1bC1774538c";
 
 module.exports = async function(deployer, network) {
     // get the current deployer address

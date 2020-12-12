@@ -17,10 +17,10 @@ const IERC20 = artifacts.require("IERC20.sol");
 
 const owner = "0xB844C65F3E161061bA5D5dD8497B3C04B71c4c83";
 
-const rewardTokenAddress = "0x6ac3698da68a8e3eF7FB3EEC6E688d904DF21146";
-const dexWhitelistAddress = "0x56D11549597a6685D48CFE9B571A66F7b819B9D9";
+const rewardTokenAddress = "0x2f4d4cFAb714e4573189B300293944673Fe0efF7";
+const dexWhitelistAddress = "0xC8A46b066BC148E08c80cfc6638Ea1bC1774538c";
 
-const rewardPerBlock = new BN("9.2592593e+15"); // apr. 200k/mo for KOVAN
+const rewardPerBlock = new BN("9.2592593e+15"); // apr. 200k/mo for KOVAN (1 block – 4 seconds)
 const startBlock = 0;
 const bonusEndBlock = 0;
 
