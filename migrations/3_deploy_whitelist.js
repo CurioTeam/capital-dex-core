@@ -1,6 +1,6 @@
-const { deployProxy } = require('@openzeppelin/truffle-upgrades');
+const { deployProxy } = require("@openzeppelin/truffle-upgrades");
 
-const DexWhitelist = artifacts.require('DexWhitelist');
+const DexWhitelist = artifacts.require("DexWhitelist");
 
 const owner = "0xB844C65F3E161061bA5D5dD8497B3C04B71c4c83";
 const manager = "0x622153C82dA8E31fB6193c0F8c2768a360f3Db18";
