@@ -1,3 +1,6 @@
+const fs = require("fs");
+const path = require("path");
+
 const {
     BN,
     ether,
@@ -32,7 +35,7 @@ const tDAIFaucetAmt = ether("1000");    // 1000
 
 const faucetOwner = "0xB844C65F3E161061bA5D5dD8497B3C04B71c4c83";
 
-module.exports = async function(deployer) {
+module.exports = async function(deployer, network) {
     // get the current deployer address
     const accounts = await web3.eth.getAccounts();
     const curDeployer = accounts[0];
@@ -65,4 +68,26 @@ module.exports = async function(deployer) {
 
     // transfer faucet ownership to new owner
     await tokenFaucet.transferOwnership(faucetOwner);
+
+    // write addresses and ABI to files
+    const contractsAddresses = {
+        tCGT: tCGT.address,
+        tCSC: tCSC.address,
+        tCUR: tCUR.address,
+        tDAI: tDAI.address,
+        TokenFaucet: tokenFaucet.address
+    };
+
+    const contractsAbi = {
+        token: tCGT.abi,
+        TokenFaucet: tokenFaucet.abi
+    };
+
+    const deployDirectory = `${__dirname}/../deployed`;
+    if (!fs.existsSync(deployDirectory)) {
+        fs.mkdirSync(deployDirectory);
+    }
+
+    fs.writeFileSync(path.join(deployDirectory, `${network}_mocks_addresses.json`), JSON.stringify(contractsAddresses, null, 2));
+    fs.writeFileSync(path.join(deployDirectory, `${network}_mocks_abi.json`), JSON.stringify(contractsAbi, null, 2));
 };

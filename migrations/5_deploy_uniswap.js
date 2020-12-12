@@ -1,3 +1,6 @@
+const fs = require("fs");
+const path = require("path");
+
 const {
     ether,
     constants,
@@ -17,7 +20,7 @@ const fee = ether("0.1");  // 10%
 
 const dexWhitelistAddress = "0x56D11549597a6685D48CFE9B571A66F7b819B9D9";
 
-module.exports = async function(deployer) {
+module.exports = async function(deployer, network) {
     // get the current deployer address
     const accounts = await web3.eth.getAccounts();
     const curDeployer = accounts[0];
@@ -60,4 +63,24 @@ module.exports = async function(deployer) {
     await uniswapFactory.setOwner(
         owner
     );
+
+    // write addresses and ABI to files
+    const contractsAddresses = {
+        uniswapFactory: uniswapFactory.address,
+        uniswapRouter: uniswapRouter.address,
+        dexWhitelistAddress: dexWhitelistAddress
+    };
+
+    const contractsAbi = {
+        uniswapFactory: uniswapFactory.abi,
+        uniswapRouter: uniswapRouter.abi
+    };
+
+    const deployDirectory = `${__dirname}/../deployed`;
+    if (!fs.existsSync(deployDirectory)) {
+        fs.mkdirSync(deployDirectory);
+    }
+
+    fs.writeFileSync(path.join(deployDirectory, `${network}_uniswap_addresses.json`), JSON.stringify(contractsAddresses, null, 2));
+    fs.writeFileSync(path.join(deployDirectory, `${network}_uniswap_abi.json`), JSON.stringify(contractsAbi, null, 2));
 };

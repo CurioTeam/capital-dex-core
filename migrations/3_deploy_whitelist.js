@@ -1,3 +1,6 @@
+const fs = require("fs");
+const path = require("path");
+
 const { deployProxy } = require("@openzeppelin/truffle-upgrades");
 
 const DexWhitelist = artifacts.require("DexWhitelist");
@@ -5,7 +8,7 @@ const DexWhitelist = artifacts.require("DexWhitelist");
 const owner = "0xB844C65F3E161061bA5D5dD8497B3C04B71c4c83";
 const manager = "0x622153C82dA8E31fB6193c0F8c2768a360f3Db18";
 
-module.exports = async function(deployer) {
+module.exports = async function(deployer, network) {
     // get the current deployer address
     const accounts = await web3.eth.getAccounts();
     const curDeployer = accounts[0];
@@ -28,4 +31,21 @@ module.exports = async function(deployer) {
     // transfer owner permission
     await dexWhitelist.removeAdmin(curDeployer);
     await dexWhitelist.transferOwnership(owner);
+
+    // write addresses and ABI to files
+    const contractsAddresses = {
+        dexWhitelist: dexWhitelist.address
+    };
+
+    const contractsAbi = {
+        dexWhitelist: dexWhitelist.abi
+    };
+
+    const deployDirectory = `${__dirname}/../deployed`;
+    if (!fs.existsSync(deployDirectory)) {
+        fs.mkdirSync(deployDirectory);
+    }
+
+    fs.writeFileSync(path.join(deployDirectory, `${network}_whitelist_addresses.json`), JSON.stringify(contractsAddresses, null, 2));
+    fs.writeFileSync(path.join(deployDirectory, `${network}_whitelist_abi.json`), JSON.stringify(contractsAbi, null, 2));
 };

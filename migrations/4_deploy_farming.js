@@ -1,3 +1,6 @@
+const fs = require("fs");
+const path = require("path");
+
 const {
     BN,
     ether,
@@ -23,7 +26,7 @@ const bonusEndBlock = 0;
 
 const initialReservoirSupply = ether(new BN(4.8e6));
 
-module.exports = async function(deployer) {
+module.exports = async function(deployer, network) {
     // get the current deployer address
     const accounts = await web3.eth.getAccounts();
     const curDeployer = accounts[0];
@@ -83,4 +86,27 @@ module.exports = async function(deployer) {
 
     // transfer owner permission
     await masterChef.transferOwnership(owner);
+
+    // write addresses and ABI to files
+    const contractsAddresses = {
+        masterChef: masterChef.address,
+        reservoir: reservoir.address,
+        dummyToken: dummyToken.address,
+        rewardTokenAddress: rewardTokenAddress,
+        dexWhitelistAddress: dexWhitelistAddress
+    };
+
+    const contractsAbi = {
+        masterChef: masterChef.abi,
+        reservoir: reservoir.abi,
+        dummyToken: dummyToken.abi
+    };
+
+    const deployDirectory = `${__dirname}/../deployed`;
+    if (!fs.existsSync(deployDirectory)) {
+        fs.mkdirSync(deployDirectory);
+    }
+
+    fs.writeFileSync(path.join(deployDirectory, `${network}_farming_addresses.json`), JSON.stringify(contractsAddresses, null, 2));
+    fs.writeFileSync(path.join(deployDirectory, `${network}_farming_abi.json`), JSON.stringify(contractsAbi, null, 2));
 };
