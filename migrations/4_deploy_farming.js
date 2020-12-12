@@ -2,7 +2,7 @@ const {
     BN,
     ether,
     constants,
-} = require('@openzeppelin/test-helpers');
+} = require("@openzeppelin/test-helpers");
 
 const { ZERO_ADDRESS } = constants;
 
