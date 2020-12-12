@@ -42,13 +42,16 @@ module.exports = async function(deployer) {
     );
     console.log("masterChef address: ", masterChef.address);
 
-    // add 2/3 reward to DummyToken
+    // DummyToken deployment
     let dummyToken = await deployer.deploy(ERC20Mock,
         "DUMMY",
         "DUMMY",
         curDeployer,
         ether("1")
     );
+    console.log("dummyToken address: ", dummyToken.address);
+
+    // add reward to DummyToken
     await masterChef.add(
         ether("1"),
         dummyToken.address,
