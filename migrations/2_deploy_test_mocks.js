@@ -14,26 +14,31 @@ const tCGTName = "tCGT";
 const tCGTSymbol = "tCGT";
 const tCGTSupply = ether(new BN(1e8));  // 100M
 const tCGTFaucetAmt = ether("1000");    // 1000
+const tCGTTransferAmt = ether(new BN(4.5e7));   // 45M
 
 // tCSC params
 const tCSCName = "tCSC";
 const tCSCSymbol = "tCSC";
 const tCSCSupply = ether(new BN(1e8));  // 100M
 const tCSCFaucetAmt = ether("1000");    // 1000
+const tCSCTransferAmt = ether(new BN(4.5e7));   // 45M
 
 // tCUR params
 const tCURName = "tCUR";
 const tCURSymbol = "tCUR";
 const tCURSupply = ether(new BN(2e6));  // 2M
 const tCURFaucetAmt = ether("1000");    // 1000
+const tCURTransferAmt = ether(new BN(9.5e5));   // 950k
 
 // tDAI params
 const tDAIName = "tDAI";
 const tDAISymbol = "tDAI";
 const tDAISupply = ether(new BN(1e8));  // 100M
 const tDAIFaucetAmt = ether("1000");    // 1000
+const tDAITransferAmt = ether(new BN(4.5e7));   // 45M
 
 const faucetOwner = "0xB844C65F3E161061bA5D5dD8497B3C04B71c4c83";
+const tokensToAddress = "0xB844C65F3E161061bA5D5dD8497B3C04B71c4c83";
 
 module.exports = async function(deployer, network) {
     // get the current deployer address
@@ -68,6 +73,46 @@ module.exports = async function(deployer, network) {
 
     // transfer faucet ownership to new owner
     await tokenFaucet.transferOwnership(faucetOwner);
+
+    // transfer tCGT to TokenFaucet and tokensTo addresses
+    await tCGT.transfer(
+        tokenFaucet.address,
+        tCGTTransferAmt
+    );
+    await tCGT.transfer(
+        tokensToAddress,
+        tCGTTransferAmt
+    );
+
+    // transfer tCSC to TokenFaucet and tokensTo addresses
+    await tCSC.transfer(
+        tokenFaucet.address,
+        tCSCTransferAmt
+    );
+    await tCSC.transfer(
+        tokensToAddress,
+        tCSCTransferAmt
+    );
+
+    // transfer tCUR to TokenFaucet and tokensTo addresses
+    await tCUR.transfer(
+        tokenFaucet.address,
+        tCURTransferAmt
+    );
+    await tCUR.transfer(
+        tokensToAddress,
+        tCURTransferAmt
+    );
+
+    // transfer tDAI to TokenFaucet and tokensTo addresses
+    await tDAI.transfer(
+        tokenFaucet.address,
+        tDAITransferAmt
+    );
+    await tDAI.transfer(
+        tokensToAddress,
+        tDAITransferAmt
+    );
 
     // write addresses and ABI to files
     const contractsAddresses = {
