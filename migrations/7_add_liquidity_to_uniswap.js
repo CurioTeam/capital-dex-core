@@ -30,6 +30,8 @@ const kETHLiquidity = ether("0.5");
 const kETHLiquidityTotDAI = ether("292.5");
 
 module.exports = async function(deployer, network) {
+    if (network === "test") return; // skip migrations if use test network
+
     // get the current deployer address
     const accounts = await web3.eth.getAccounts();
     const user = accounts[0];

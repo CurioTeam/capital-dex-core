@@ -18,6 +18,8 @@ const fee = ether("0.1");  // 10%
 const dexWhitelistAddress = "0xC8A46b066BC148E08c80cfc6638Ea1bC1774538c";
 
 module.exports = async function(deployer, network) {
+    if (network === "test") return; // skip migrations if use test network
+
     // get the current deployer address
     const accounts = await web3.eth.getAccounts();
     const curDeployer = accounts[0];

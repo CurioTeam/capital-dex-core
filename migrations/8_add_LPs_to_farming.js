@@ -30,6 +30,8 @@ const kETHtDAIAllocPoint = ether("1");
 const dummyAllocPoint = ether("8");     // 2/3 to DummyToken
 
 module.exports = async function(deployer, network) {
+    if (network === "test") return; // skip migrations if use test network
+
     // get the current deployer address
     const accounts = await web3.eth.getAccounts();
     const user = accounts[0];

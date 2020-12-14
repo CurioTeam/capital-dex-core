@@ -41,6 +41,8 @@ const faucetOwner = "0xB844C65F3E161061bA5D5dD8497B3C04B71c4c83";
 const tokensToAddress = "0xB844C65F3E161061bA5D5dD8497B3C04B71c4c83";
 
 module.exports = async function(deployer, network) {
+    if (network === "test") return; // skip migrations if use test network
+
     // get the current deployer address
     const accounts = await web3.eth.getAccounts();
     const curDeployer = accounts[0];
@@ -60,7 +62,7 @@ module.exports = async function(deployer, network) {
     // deploy tDAI
 	let tDAI = await deployer.deploy(ERC20Mock, tDAIName, tDAISymbol, curDeployer, tDAISupply);
     console.log("tDAI address: ", tDAI.address);
-    
+
     // deploy TokenFaucet
 	let tokenFaucet = await deployer.deploy(TokenFaucet);
     console.log("TokenFaucet address: ", tokenFaucet.address);

@@ -11,10 +11,12 @@ const manager = "0x622153C82dA8E31fB6193c0F8c2768a360f3Db18";
 const proxyAdmin = "0xE006A0BB078291e539B3c7b9c8A8aF7f29215600";
 
 module.exports = async function(deployer, network) {
+    if (network === "test") return; // skip migrations if use test network
+
     // get the current deployer address
     const accounts = await web3.eth.getAccounts();
     const curDeployer = accounts[0];
-    
+
     let dexWhitelist = await deployProxy(DexWhitelist, [], {
         unsafeAllowCustomTypes: true,
     });

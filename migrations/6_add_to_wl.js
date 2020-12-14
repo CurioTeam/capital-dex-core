@@ -11,6 +11,8 @@ const tDAIAddress = "0x330294de10bAd15f373BA7429Ab9685eDe43c13f";
 const wethAddress = "0xd0A1E359811322d97991E03f863a0C30C2cF029C";   // KOVAN WETH address
 
 module.exports = async function(deployer, network) {
+    if (network === "test") return; // skip migrations if use test network
+
     // get the current deployer address
     const accounts = await web3.eth.getAccounts();
     const admin = accounts[0];

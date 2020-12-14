@@ -27,6 +27,8 @@ const bonusEndBlock = 0;
 const initialReservoirSupply = ether(new BN(4.8e6));
 
 module.exports = async function(deployer, network) {
+    if (network === "test") return; // skip migrations if use test network
+
     // get the current deployer address
     const accounts = await web3.eth.getAccounts();
     const curDeployer = accounts[0];
