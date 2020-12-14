@@ -4,7 +4,6 @@ const DexWhitelist = artifacts.require("DexWhitelist");
 
 const dexWhitelistAddress = "0xC8A46b066BC148E08c80cfc6638Ea1bC1774538c";
 
-// KOVAN contract addresses
 const tCGTAddress = "0x2f4d4cFAb714e4573189B300293944673Fe0efF7";
 const tCSCAddress = "0x558FC7FA5471Ff77c56b9cB37207d099EAcE8379";
 const tCURAddress = "0x42Bbfc77Ee4Ed0efC608634859a672D0cf49e1b4";

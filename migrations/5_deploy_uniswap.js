@@ -28,6 +28,8 @@ module.exports = async function(deployer, network) {
     );
     console.log("uniswapFactory address: ", uniswapFactory.address);
 
+    console.log("pairCodeHash: ", await uniswapFactory.pairCodeHash());
+
     // UniswapRouter deployment
     let uniswapRouter = await deployer.deploy(UniswapRouter,
         uniswapFactory.address,
