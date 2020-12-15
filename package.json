@@ -8,9 +8,6 @@
     "contracts",
     "build"
   ],
-  "engines": {
-    "node": "^14.15.0"
-  },
   "repository": "https://github.com/CurioTeam/capital-dex-core",
   "scripts": {
     "compile": "npx truffle compile",
