@@ -4,9 +4,10 @@
   "description": "Capital Dex Core smart contracts",
   "author": "Curio Capital AG",
   "license": "MIT",
-  "directories": {
-    "test": "test"
-  },
+  "files": [
+    "contracts",
+    "build"
+  ],
   "engines": {
     "node": "^14.15.0"
   },
@@ -17,7 +18,8 @@
     "deploy": "npx truffle migrate --network local",
     "test": "npx truffle compile --all && mocha --exit --recursive test --timeout 10000",
     "test:truffle": "npx truffle test --network test",
-    "clean": "rm -rf ./build"
+    "clean": "rm -rf ./build",
+    "build": "npx truffle compile"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^3.3.0",
