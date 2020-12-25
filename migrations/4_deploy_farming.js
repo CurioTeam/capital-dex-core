@@ -37,7 +37,7 @@ module.exports = async function(deployer, network) {
     let rewardToken = await IERC20.at(rewardTokenAddress);
 
     // MasterChef deployment
-    let masterChef = await deployer.deploy(MasterChef,
+    await deployer.deploy(MasterChef,
         rewardToken.address,
         ZERO_ADDRESS,
         rewardPerBlock,
@@ -45,15 +45,17 @@ module.exports = async function(deployer, network) {
         bonusEndBlock,
         dexWhitelistAddress
     );
+    let masterChef = await MasterChef.deployed();
     console.log("masterChef address: ", masterChef.address);
 
     // DummyToken deployment
-    let dummyToken = await deployer.deploy(ERC20Mock,
+    await deployer.deploy(ERC20Mock,
         "DUMMY",
         "DUMMY",
         curDeployer,
         ether("1")
     );
+    let dummyToken = await ERC20Mock.deployed();
     console.log("dummyToken address: ", dummyToken.address);
 
     // add reward to DummyToken
@@ -64,10 +66,11 @@ module.exports = async function(deployer, network) {
     );
 
     // Reservoir deployment
-    let reservoir = await deployer.deploy(Reservoir,
+    await deployer.deploy(Reservoir,
         rewardToken.address,
         masterChef.address
     );
+    let reservoir = await Reservoir.deployed();
     console.log("reservoir address: ", reservoir.address);
 
     // transfer RewardTokens to Reservoir

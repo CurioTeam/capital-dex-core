@@ -25,18 +25,20 @@ module.exports = async function(deployer, network) {
     const curDeployer = accounts[0];
 
     // UniswapFactory deployment
-    let uniswapFactory = await deployer.deploy(UniswapFactory,
+    await deployer.deploy(UniswapFactory,
         curDeployer
     );
+    let uniswapFactory = await UniswapFactory.deployed();
     console.log("uniswapFactory address: ", uniswapFactory.address);
 
     console.log("pairCodeHash: ", await uniswapFactory.pairCodeHash());
 
     // UniswapRouter deployment
-    let uniswapRouter = await deployer.deploy(UniswapRouter,
+    await deployer.deploy(UniswapRouter,
         uniswapFactory.address,
         wethAddress
     );
+    let uniswapRouter = await UniswapRouter.deployed();
     console.log("uniswapRouter address: ", uniswapRouter.address);
 
     // set WL to UniswapFactory

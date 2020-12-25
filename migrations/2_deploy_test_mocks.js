@@ -48,23 +48,28 @@ module.exports = async function(deployer, network) {
     const curDeployer = accounts[0];
 
 	// deploy tCGT
-	let tCGT = await deployer.deploy(ERC20Mock, tCGTName, tCGTSymbol, curDeployer, tCGTSupply);
+    await deployer.deploy(ERC20Mock, tCGTName, tCGTSymbol, curDeployer, tCGTSupply);
+    let tCGT = await ERC20Mock.deployed();
     console.log("tCGT address: ", tCGT.address);
 
     // deploy tCSC
-	let tCSC = await deployer.deploy(ERC20Mock, tCSCName, tCSCSymbol, curDeployer, tCSCSupply);
+    await deployer.deploy(ERC20Mock, tCSCName, tCSCSymbol, curDeployer, tCSCSupply);
+    let tCSC = await ERC20Mock.deployed();
     console.log("tCSC address: ", tCSC.address);
 
     // deploy tCUR
-	let tCUR = await deployer.deploy(ERC20Mock, tCURName, tCURSymbol, curDeployer, tCURSupply);
+    await deployer.deploy(ERC20Mock, tCURName, tCURSymbol, curDeployer, tCURSupply);
+    let tCUR = await ERC20Mock.deployed();
     console.log("tCUR address: ", tCUR.address);
 
     // deploy tDAI
-	let tDAI = await deployer.deploy(ERC20Mock, tDAIName, tDAISymbol, curDeployer, tDAISupply);
+    await deployer.deploy(ERC20Mock, tDAIName, tDAISymbol, curDeployer, tDAISupply);
+    let tDAI = await ERC20Mock.deployed();
     console.log("tDAI address: ", tDAI.address);
 
     // deploy TokenFaucet
-	let tokenFaucet = await deployer.deploy(TokenFaucet);
+    await deployer.deploy(TokenFaucet);
+    let tokenFaucet = await TokenFaucet.deployed();
     console.log("TokenFaucet address: ", tokenFaucet.address);
 
     // set faucet gulp amount for test tokens
