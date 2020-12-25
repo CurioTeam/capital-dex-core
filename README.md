@@ -39,3 +39,56 @@ npm run compile
 ```sh
 npm run test:truffle
 ```
+
+### Migrations and deployment
+
+Parameters should be updated before each migration script.
+
+#### Deploy test tokens and token faucet contracts
+[update parameters](/migrations/2_deploy_test_mocks.js)
+
+```sh
+npm run deploy:mocks
+```
+
+#### Deploy whitelist contract
+[update parameters](/migrations/3_deploy_whitelist.js)
+
+```sh
+npm run deploy:whitelist
+```
+
+#### Deploy farming contracts
+[update parameters](/migrations/4_deploy_farming.js)
+
+```sh
+npm run deploy:farming
+```
+
+#### Deploy AMM based on uniswap contracts
+[update parameters](/migrations/5_deploy_uniswap.js)
+
+```sh
+npm run deploy:uniswap
+```
+
+#### Add admins and tokens to whitelist 
+[update parameters](/migrations/6_add_to_wl.js)
+
+```sh
+npm run set:whitelist
+```
+
+#### Add liquidity to AMM based on uniswap
+[update parameters](/migrations/7_add_liquidity_to_uniswap.js)
+
+```sh
+npm run set:uniswap
+```
+
+#### Create farming pools and add LP tokens to farming
+[update parameters](/migrations/8_add_LPs_to_farming.js)
+
+```sh
+npm run set:farming
+```
