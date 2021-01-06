@@ -38,6 +38,14 @@ const config = {
       skipDryRun: true,
       network_id: '42'
     },
+    mainnet: {
+      gasPrice: 75 * 1000 * 1000 * 1000, // 75 gwei
+      gasLimit: 4 * 1000 * 1000, // 4,000,000
+      provider: getProvider(`wss://mainnet.infura.io/ws/v3/${ process.env.INFURA_PROJECT_ID }`),
+      websockets: true,
+      skipDryRun: false,
+      network_id: '1'
+    },
   },
   mocha: {
     timeout: 10000
@@ -53,6 +61,12 @@ const config = {
         evmVersion: "istanbul"
       }
     }
+  },
+  plugins: [
+    'truffle-plugin-verify'
+  ],
+  api_keys: {
+    etherscan: process.env.ETHERSCAN_API_KEY
   }
 };
 
