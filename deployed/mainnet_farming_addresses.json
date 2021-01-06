@@ -1,0 +1,7 @@
+{
+  "masterChef": "0xe8Cc9f640C55f3c5905FD2BBb63C53fb8A3A527d",
+  "reservoir": "0x50d4b0118237d27E5faF42300e7c7385C91Df5bB",
+  "dummyToken": "0x7F98372A9852fd04B17a5617F18a9C7cC0F2c4DE",
+  "rewardTokenAddress": "0xF56b164efd3CFc02BA739b719B6526A6FA1cA32a",
+  "dexWhitelistAddress": "0xB2C747Aed3e54da0ad14D41B710CC40F88E51aA9"
+}

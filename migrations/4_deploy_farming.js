@@ -16,11 +16,16 @@ const MasterChef = artifacts.require("MasterChef");
 const IERC20 = artifacts.require("IERC20.sol");
 
 const owner = "0xB844C65F3E161061bA5D5dD8497B3C04B71c4c83";
+// const owner = "0x94ddecAFF0109b615e51C482e07312abce704042"; // Mainnet
 
 const rewardTokenAddress = "0x2f4d4cFAb714e4573189B300293944673Fe0efF7";
+// const rewardTokenAddress = "0xF56b164efd3CFc02BA739b719B6526A6FA1cA32a"; // Mainnet - CGT
+
 const dexWhitelistAddress = "0xC8A46b066BC148E08c80cfc6638Ea1bC1774538c";
+// const dexWhitelistAddress = "0xB2C747Aed3e54da0ad14D41B710CC40F88E51aA9"; // Mainnet
 
 const rewardPerBlock = new BN("9.2592593e+15"); // apr. 200k/mo for KOVAN (1 block – 4 seconds)
+// const rewardPerBlock = new BN("289351851851851851"); // Mainnet - 50k/mo for Mainnet (1 block - 15 seconds)
 const startBlock = 0;
 const bonusEndBlock = 0;
 

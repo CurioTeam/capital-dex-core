@@ -8,7 +8,9 @@ const {
 const IERC20 = artifacts.require("IERC20.sol");
 const MasterChef = artifacts.require("MasterChef.sol");
 
-// contract addresses
+// const owner = "0x5C064Bf2c4c3669068167E0DEF02D5318810BCE0"; // Mainnet admin (temp)
+
+// Kovan
 const tCGTtDAIPairAddress = "0x56e25a8b226789daa0297c602807b28e2d14a100";
 const tCSCtDAIPairAddress = "0x1f992899a69b273821c53ea886f605c911b93995";
 const tCURtDAIPairAddress = "0x83e1f7a2d21a54f846696d2b770ae293bdc2348e";
@@ -22,12 +24,31 @@ const tCSCtDAIPairPid = 2;
 const tCURtDAIPairPid = 3;
 const kETHtDAIPairPid = 4;
 
-// allocPoints
 const tCGTtDAIAllocPoint = ether("1");
 const tCSCtDAIAllocPoint = ether("1");
 const tCURtDAIAllocPoint = ether("1");
 const kETHtDAIAllocPoint = ether("1");
 const dummyAllocPoint = ether("8");     // 2/3 to DummyToken
+
+// Mainnet
+/*
+const ETHCGTPairAddress = "0x9a7c27F2BfD86001c0E9B5b9096564F64F37439E";
+const ETHCURPairAddress = "0x85323e31bCa3a8da8c5307671DDe878C4bBCDD36";
+const CGTDAIPairAddress = "0xB9FcE07dB9737810CbC573E43ba700aA4655b6Bc";
+
+const masterChefAddress = "0xe8Cc9f640C55f3c5905FD2BBb63C53fb8A3A527d";
+const dummyTokenAddress = "0x7F98372A9852fd04B17a5617F18a9C7cC0F2c4DE";
+
+const dummyTokenPid = 0;
+const ETHCGTPairPid = 1;
+const ETHCURPairPid = 2;
+const CGTDAIPairPid = 3;
+
+const ETHCGTAllocPoint = ether("1");
+const ETHCURAllocPoint = ether("1");
+const CGTDAIAllocPoint = ether("1");
+const dummyAllocPoint = ether("6");     // 2/3 to DummyToken
+*/
 
 module.exports = async function(deployer, network) {
     if (network === "test") return; // skip migrations if use test network
@@ -35,6 +56,44 @@ module.exports = async function(deployer, network) {
     // get the current deployer address
     const accounts = await web3.eth.getAccounts();
     const user = accounts[0];
+
+    // Mainnet
+    /*
+    let ETHCGTPair  = await IERC20.at(ETHCGTPairAddress);
+    let ETHCURPair  = await IERC20.at(ETHCURPairAddress);
+    let CGTDAIPair = await IERC20.at(CGTDAIPairAddress);
+    let dummyToken = await IERC20.at(dummyTokenAddress);
+
+    let masterChef = await MasterChef.at(masterChefAddress);
+
+    await masterChef.add(
+        ETHCGTAllocPoint,
+        ETHCGTPair.address,
+        false,
+    );
+    console.log("added ETHCGTPair LP");
+
+    await masterChef.add(
+        ETHCURAllocPoint,
+        ETHCURPair.address,
+        false,
+    );
+    console.log("added ETHCURPair LP");
+
+    await masterChef.add(
+        CGTDAIAllocPoint,
+        CGTDAIPair.address,
+        false,
+    );
+    console.log("added CGTDAIPair LP");
+
+    await masterChef.set(
+        dummyTokenPid,
+        dummyAllocPoint,
+        true,
+    );
+    console.log("set dummyToken LP");
+    */
 
     // get tokens from addresses
     let tCGTtDAIPair  = await IERC20.at(tCGTtDAIPairAddress);
@@ -144,6 +203,23 @@ module.exports = async function(deployer, network) {
     );
     console.log("deposited dummyToken LP");
 
+    // Mainnet
+    /*
+    const contractsAddresses = {
+        dummyTokenAddress: dummyTokenAddress,
+        ETHCGTPairAddress: ETHCGTPairAddress,
+        ETHCURPairAddress: ETHCURPairAddress,
+        CGTDAIPairAddress: CGTDAIPairAddress,
+    };
+
+    const pid = {
+        dummyTokenPid: dummyTokenPid,
+        ETHCGTPairPid: ETHCGTPairPid,
+        ETHCURPairPid: ETHCURPairPid,
+        CGTDAIPairPid: CGTDAIPairPid,
+    };
+    */
+
     // write addresses, PIDs and ABI to files
     const contractsAddresses = {
         dummyTokenAddress: dummyTokenAddress,
@@ -158,7 +234,7 @@ module.exports = async function(deployer, network) {
         tCGTtDAIPairPid: tCGTtDAIPairPid,
         tCSCtDAIPairPid: tCSCtDAIPairPid,
         tCURtDAIPairPid: tCURtDAIPairPid,
-        kETHtDAIPairPid, kETHtDAIPairPid
+        kETHtDAIPairPid: kETHtDAIPairPid
     };
 
     const contractsAbi = {

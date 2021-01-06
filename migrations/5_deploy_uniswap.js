@@ -8,14 +8,19 @@ const {
 const UniswapFactory = artifacts.require("UniswapV2Factory.sol");
 const UniswapRouter = artifacts.require("UniswapV2Router02.sol");
 
-const wethAddress = "0xd0A1E359811322d97991E03f863a0C30C2cF029C";   // KOVAN WETH address
+const wethAddress = "0xd0A1E359811322d97991E03f863a0C30C2cF029C"; // KOVAN WETH address
+// const wethAddress = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"; // Mainnet WETH address
 
 const owner = "0xB844C65F3E161061bA5D5dD8497B3C04B71c4c83";
+// const owner = "0x94ddecAFF0109b615e51C482e07312abce704042"; // Mainnet
 
 const feeToAddress = "0xB844C65F3E161061bA5D5dD8497B3C04B71c4c83";
+// const feeToAddress = "0x94ddecAFF0109b615e51C482e07312abce704042"; // Mainnet
+
 const fee = ether("0.1");  // 10%
 
 const dexWhitelistAddress = "0xC8A46b066BC148E08c80cfc6638Ea1bC1774538c";
+// const dexWhitelistAddress = "0xB2C747Aed3e54da0ad14D41B710CC40F88E51aA9"; // Mainnet
 
 module.exports = async function(deployer, network) {
     if (network === "test") return; // skip migrations if use test network
