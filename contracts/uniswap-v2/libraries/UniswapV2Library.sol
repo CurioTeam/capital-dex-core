@@ -1,3 +1,29 @@
+/*
+ * Capital DEX
+ *
+ * Copyright ©️ 2020 Curio AG (Company Number FL-0002.594.728-9)
+ * Incorporated and registered in Liechtenstein.
+ *
+ * Copyright ©️ 2020 Curio Capital AG (Company Number CHE-211.446.654)
+ * Incorporated and registered in Zug, Switzerland.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Source https://github.com/Uniswap/uniswap-v2-core
+ * Subject to the GPL-3.0 license.
+ */
+// SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.5.0;
 
 import '../interfaces/IUniswapV2Pair.sol';
@@ -21,7 +47,7 @@ library UniswapV2Library {
                 hex'ff',
                 factory,
                 keccak256(abi.encodePacked(token0, token1)),
-                hex'eb421c75c82ac3e801293f21bf65f03f21b5a26a0921355126d34b4c5173bfe9' // init code hash
+                hex'068929976e9b11179f781aadb37dc33b6fc0d30a27419125438dab4d4d11418b' // init code hash
             ))));
     }
 
