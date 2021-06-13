@@ -35,6 +35,7 @@ describe('Contract whitelist/DexWhitelist.sol', function () {
     };
 
     beforeEach(async function () {
+        await DexWhitelist.detectNetwork();
         this.dexWhitelist = await deployProxy(DexWhitelist, [], {
             unsafeAllowCustomTypes: true,
         });
