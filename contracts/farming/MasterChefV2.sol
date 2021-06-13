@@ -39,6 +39,7 @@ import "../interfaces/IDexWhitelist.sol";
  *  XXX: Removed devaddr for reward;
  *  XXX: Added whitelist from DexWhitelist;
  *  XXX: Added check if LP token has already been added;
+ *  XXX: Added sushiPerBlock update logic;
  *  XXX: sushi == farming CGT token.
  */
 
@@ -111,6 +112,7 @@ contract MasterChefV2 is Ownable {
 
     event SetWhitelist(address whitelist);      // XXX: set whitelist event
     event SetSushiReservoir(address reservoir); // XXX: set reservoir event
+    event SetSushiPerBlock(uint256 sushiPerBlock); // XXX: set sushiPerBlock event
 
     constructor(
         IERC20 _sushi,
@@ -178,6 +180,15 @@ contract MasterChefV2 is Ownable {
     function setSushiReservoir(IReservoir _sushiReservoir) public onlyOwner {
         sushiReservoir = _sushiReservoir;
         emit SetSushiReservoir(address(_sushiReservoir));
+    }
+
+    // XXX: set sushiPerBlock. Can only be called by the owner.
+    function setSushiPerBlock(uint256 _sushiPerBlock, bool _withUpdate) public onlyOwner {
+        if (_withUpdate) {
+            massUpdatePools();
+        }
+        sushiPerBlock = _sushiPerBlock;
+        emit SetSushiPerBlock(_sushiPerBlock);
     }
 
     // Return reward multiplier over the given _from to _to block.
