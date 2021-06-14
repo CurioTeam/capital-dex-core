@@ -8,46 +8,44 @@ const {
 const IERC20 = artifacts.require("IERC20.sol");
 const MasterChefV2 = artifacts.require("MasterChefV2.sol");
 
-// const owner = "0x5C064Bf2c4c3669068167E0DEF02D5318810BCE0"; // Mainnet admin (temp)
-
 // Kovan
-const tCGTtDAIPairAddress = "0x56e25a8b226789daa0297c602807b28e2d14a100";
-const tCSCtDAIPairAddress = "0x1f992899a69b273821c53ea886f605c911b93995";
 const tCURtDAIPairAddress = "0x83e1f7a2d21a54f846696d2b770ae293bdc2348e";
 const kETHtDAIPairAddress = "0x2544df97c605184273367cfe513cd8f7c535c0d8";
-const masterChefV2Address = "0xAC83652E5BB9dbdBdb0e8DBb70d2230214fC203e";
-const dummyTokenAddress = "0x055bb9f1ff0d624C5Df1117B08F517629B3c5540";
+const masterChefV2Address = "0xb2253eF8238C5EF57aFeb0ffC90Ae7825445FdF0";
+const dummyTokenAddress = "0xf27f67Fa3bd61065BEd50254ccD84f2C518Ebdb4";
 
 const dummyTokenPid = 0;
-const tCGTtDAIPairPid = 1;
-const tCSCtDAIPairPid = 2;
-const tCURtDAIPairPid = 3;
-const kETHtDAIPairPid = 4;
+const tCURtDAIPairPid = 1;
+const kETHtDAIPairPid = 2;
 
-const tCGTtDAIAllocPoint = ether("1");
-const tCSCtDAIAllocPoint = ether("1");
 const tCURtDAIAllocPoint = ether("1");
 const kETHtDAIAllocPoint = ether("1");
-const dummyAllocPoint = ether("8");     // 2/3 to DummyToken
+const dummyAllocPoint = ether("4");     // 2/3 to DummyToken
 
-// Mainnet
 /*
-const ETHCGTPairAddress = "0x9a7c27F2BfD86001c0E9B5b9096564F64F37439E";
-const ETHCURPairAddress = "0x85323e31bCa3a8da8c5307671DDe878C4bBCDD36";
-const CGTDAIPairAddress = "0xB9FcE07dB9737810CbC573E43ba700aA4655b6Bc";
+// Mainnet
+const CGTwCT1PairAddress = "0xf67c990798221fdf41a4e77b6be2ce5c87df771e";
+const CGTLINKPairAddress = "0x6456f0176d27265c8b530aacfc1fdadae3d60b04";
+const CGTUNIPairAddress = "0x7e6bace61d6f504e2ce186025309676f461d44b8";
+const CGT1INCHPairAddress = "0xe2817e5edf6f8260f24c3ace81a0fbd49f67765f";
+const CGTXCHFPairAddress = "0x88682534fcf23111bb1cfeec7d4f699b9c9bef90";
 
-const masterChefV2Address = "0xe8Cc9f640C55f3c5905FD2BBb63C53fb8A3A527d";
-const dummyTokenAddress = "0x7F98372A9852fd04B17a5617F18a9C7cC0F2c4DE";
+const masterChefV2Address = "";
+const dummyTokenAddress = "";
 
 const dummyTokenPid = 0;
-const ETHCGTPairPid = 1;
-const ETHCURPairPid = 2;
-const CGTDAIPairPid = 3;
+const CGTwCT1PairPid = 1;
+const CGTLINKPairPid = 2;
+const CGTUNIPairPid = 3;
+const CGT1INCHPairPid = 4;
+const CGTXCHFPairPid = 5;
 
-const ETHCGTAllocPoint = ether("1");
-const ETHCURAllocPoint = ether("1");
-const CGTDAIAllocPoint = ether("1");
-const dummyAllocPoint = ether("6");     // 2/3 to DummyToken
+const CGTwCT1AllocPoint = ether("1");
+const CGTLINKAllocPoint = ether("1");
+const CGTUNIAllocPoint = ether("1");
+const CGT1INCHAllocPoint = ether("1");
+const CGTXCHFAllocPoint = ether("1");
+const dummyAllocPoint = ether("10");     // 2/3 to DummyToken
 */
 
 module.exports = async function(deployer, network) {
@@ -57,185 +55,146 @@ module.exports = async function(deployer, network) {
     const accounts = await web3.eth.getAccounts();
     const user = accounts[0];
 
-    // Mainnet
-    /*
-    let ETHCGTPair  = await IERC20.at(ETHCGTPairAddress);
-    let ETHCURPair  = await IERC20.at(ETHCURPairAddress);
-    let CGTDAIPair = await IERC20.at(CGTDAIPairAddress);
-    let dummyToken = await IERC20.at(dummyTokenAddress);
+    let dummyToken;
 
-    let masterChefV2 = await MasterChefV2.at(masterChefV2Address);
+    if (network === "mainnet") {
+        /*
+        let CGTwCT1Pair  = await IERC20.at(CGTwCT1PairAddress);
+        let CGTLINKPair  = await IERC20.at(CGTLINKPairAddress);
+        let CGTUNIPair = await IERC20.at(CGTUNIPairAddress);
+        let CGT1INCHPair  = await IERC20.at(CGT1INCHPairAddress);
+        let CGTXCHFPair = await IERC20.at(CGTXCHFPairAddress);
+        dummyToken = await IERC20.at(dummyTokenAddress);
 
-    await masterChefV2.add(
-        ETHCGTAllocPoint,
-        ETHCGTPair.address,
-        false,
-    );
-    console.log("added ETHCGTPair LP");
+        let masterChefV2 = await MasterChefV2.at(masterChefV2Address);
 
-    await masterChefV2.add(
-        ETHCURAllocPoint,
-        ETHCURPair.address,
-        false,
-    );
-    console.log("added ETHCURPair LP");
+        await masterChefV2.add(
+            CGTwCTAllocPoint,
+            CGTwCTPair.address,
+            false,
+        );
+        console.log("added CGTwCTPair LP");
 
-    await masterChefV2.add(
-        CGTDAIAllocPoint,
-        CGTDAIPair.address,
-        false,
-    );
-    console.log("added CGTDAIPair LP");
+        await masterChefV2.add(
+            CGTLINKAllocPoint,
+            CGTLINKPair.address,
+            false,
+        );
+        console.log("added CGTLINKPair LP");
 
-    await masterChefV2.set(
-        dummyTokenPid,
-        dummyAllocPoint,
-        true,
-    );
-    console.log("set dummyToken LP");
-    */
+        await masterChefV2.add(
+            CGTUNIAllocPoint,
+            CGTUNIPair.address,
+            false,
+        );
+        console.log("added CGTUNIPair LP");
 
-    // get tokens from addresses
-    let tCGTtDAIPair  = await IERC20.at(tCGTtDAIPairAddress);
-    let tCSCtDAIPair  = await IERC20.at(tCSCtDAIPairAddress);
-    let tCURtDAIPair = await IERC20.at(tCURtDAIPairAddress);
-    let kETHtDAIPair = await IERC20.at(kETHtDAIPairAddress);
-    let dummyToken = await IERC20.at(dummyTokenAddress);
+        await masterChefV2.add(
+            CGT1INCHAllocPoint,
+            CGT1INCHPair.address,
+            false,
+        );
+        console.log("added CGT1INCHPair LP");
 
-    // get MasterChefV2 from address
-    let masterChefV2 = await MasterChefV2.at(masterChefV2Address);
+        await masterChefV2.add(
+            CGTXCHFAllocPoint,
+            CGTXCHFPair.address,
+            false,
+        );
+        console.log("added CGTXCHFPair LP");
 
-    // add tCGTtDAIPair to farming
-    await masterChefV2.add(
-        tCGTtDAIAllocPoint,
-        tCGTtDAIPair.address,
-        false,
-    );
-    console.log("added tCGTtDAIPair LP");
+        await masterChefV2.set(
+            dummyTokenPid,
+            dummyAllocPoint,
+            true,
+        );
+        console.log("set dummyToken LP");
+        */
+    } else {
+        // get tokens from addresses
+        let tCURtDAIPair = await IERC20.at(tCURtDAIPairAddress);
+        let kETHtDAIPair = await IERC20.at(kETHtDAIPairAddress);
+        dummyToken = await IERC20.at(dummyTokenAddress);
 
-    // add tCSCtDAIPair to farming
-    await masterChefV2.add(
-        tCSCtDAIAllocPoint,
-        tCSCtDAIPair.address,
-        false,
-    );
-    console.log("added tCSCtDAIPair LP");
+        // get MasterChefV2 from address
+        let masterChefV2 = await MasterChefV2.at(masterChefV2Address);
 
-    // add tCURtDAIPair to farming
-    await masterChefV2.add(
-        tCURtDAIAllocPoint,
-        tCURtDAIPair.address,
-        false,
-    );
-    console.log("added tCURtDAIPair LP");
+        // add tCURtDAIPair to farming
+        await masterChefV2.add(
+            tCURtDAIAllocPoint,
+            tCURtDAIPair.address,
+            false,
+        );
+        console.log("added tCURtDAIPair LP");
 
-    // add kETHtDAIPair to farming
-    await masterChefV2.add(
-        kETHtDAIAllocPoint,
-        kETHtDAIPair.address,
-        false,
-    );
-    console.log("added kETHtDAIPair LP");
+        // add kETHtDAIPair to farming
+        await masterChefV2.add(
+            kETHtDAIAllocPoint,
+            kETHtDAIPair.address,
+            false,
+        );
+        console.log("added kETHtDAIPair LP");
 
-    // set DummyToken allocPoint
-    await masterChefV2.set(
-        dummyTokenPid,
-        dummyAllocPoint,
-        true,
-    );
-    console.log("set dummyToken LP");
+        // set DummyToken allocPoint
+        await masterChefV2.set(
+            dummyTokenPid,
+            dummyAllocPoint,
+            true,
+        );
+        console.log("set dummyToken LP");
 
-    // approve tokens
-    await tCGTtDAIPair.approve(
-        masterChefV2.address,
-        await tCGTtDAIPair.balanceOf(user)
-    );
-    await tCSCtDAIPair.approve(
-        masterChefV2.address,
-        await tCSCtDAIPair.balanceOf(user)
-    );
-    await tCURtDAIPair.approve(
-        masterChefV2.address,
-        await tCURtDAIPair.balanceOf(user)
-    );
-    await kETHtDAIPair.approve(
-        masterChefV2.address,
-        await kETHtDAIPair.balanceOf(user)
-    );
-    await dummyToken.approve(
-        masterChefV2.address,
-        await dummyToken.balanceOf(user)
-    );
-    console.log("all tokens approved");
+        // approve DummyToken
+        await dummyToken.approve(
+            masterChefV2.address,
+            await dummyToken.balanceOf(user)
+        );
+        console.log("Dummy token approved");
 
-    // deposit tCGTtDAIPair liquidity
-    await masterChefV2.deposit(
-        tCGTtDAIPairPid,
-        await tCGTtDAIPair.balanceOf(user)
-    );
-    console.log("deposited tCGTtDAIPair LP");
-
-    // deposit tCSCtDAIPair liquidity
-    await masterChefV2.deposit(
-        tCSCtDAIPairPid,
-        await tCSCtDAIPair.balanceOf(user)
-    );
-    console.log("deposited tCSCtDAIPair LP");
-
-    // deposit tCURtDAIPair liquidity
-    await masterChefV2.deposit(
-        tCURtDAIPairPid,
-        await tCURtDAIPair.balanceOf(user)
-    );
-    console.log("deposited tCURtDAIPair LP");
-
-    // deposit kETHtDAIPair liquidity
-    await masterChefV2.deposit(
-        kETHtDAIPairPid,
-        await kETHtDAIPair.balanceOf(user)
-    );
-    console.log("deposited kETHtDAIPair LP");
-
-    // deposit DummyToken liquidity
-    await masterChefV2.deposit(
-        dummyTokenPid,
-        await dummyToken.balanceOf(user)
-    );
-    console.log("deposited dummyToken LP");
-
-    // Mainnet
-    /*
-    const contractsAddresses = {
-        dummyTokenAddress: dummyTokenAddress,
-        ETHCGTPairAddress: ETHCGTPairAddress,
-        ETHCURPairAddress: ETHCURPairAddress,
-        CGTDAIPairAddress: CGTDAIPairAddress,
-    };
-
-    const pid = {
-        dummyTokenPid: dummyTokenPid,
-        ETHCGTPairPid: ETHCGTPairPid,
-        ETHCURPairPid: ETHCURPairPid,
-        CGTDAIPairPid: CGTDAIPairPid,
-    };
-    */
+        // deposit DummyToken liquidity
+        await masterChefV2.deposit(
+            dummyTokenPid,
+            await dummyToken.balanceOf(user)
+        );
+        console.log("deposited dummyToken LP");
+    }
 
     // write addresses, PIDs and ABI to files
-    const contractsAddresses = {
-        dummyTokenAddress: dummyTokenAddress,
-        tCGTtDAIPairAddress: tCGTtDAIPairAddress,
-        tCSCtDAIPairAddress: tCSCtDAIPairAddress,
-        tCURtDAIPairAddress: tCURtDAIPairAddress,
-        kETHtDAIPairAddress: kETHtDAIPairAddress
-    };
+    let contractsAddresses;
+    let pid;
 
-    const pid = {
-        dummyTokenPid: dummyTokenPid,
-        tCGTtDAIPairPid: tCGTtDAIPairPid,
-        tCSCtDAIPairPid: tCSCtDAIPairPid,
-        tCURtDAIPairPid: tCURtDAIPairPid,
-        kETHtDAIPairPid: kETHtDAIPairPid
-    };
+    if (network === "mainnet") {
+    /*
+        contractsAddresses = {
+            dummyTokenAddress: dummyTokenAddress,
+            CGTwCT1PairAddress: CGTwCT1PairAddress,
+            CGTLINKPairAddress: CGTLINKPairAddress,
+            CGTUNIPairAddress: CGTUNIPairAddress,
+            CGT1INCHPairAddress: CGT1INCHPairAddress,
+            CGTXCHFPairAddress: CGTXCHFPairAddress,
+        };
+
+        pid = {
+            dummyTokenPid: dummyTokenPid,
+            CGTwCT1PairPid: CGTwCT1PairPid,
+            CGTLINKPairPid: CGTLINKPairPid,
+            CGTUNIPairPid: CGTUNIPairPid,
+            CGT1INCHPairPid: CGT1INCHPairPid,
+            CGTXCHFPairPid: CGTXCHFPairPid,
+        };
+    */
+    } else {
+        contractsAddresses = {
+            dummyTokenAddress: dummyTokenAddress,
+            tCURtDAIPairAddress: tCURtDAIPairAddress,
+            kETHtDAIPairAddress: kETHtDAIPairAddress
+        };
+
+        pid = {
+            dummyTokenPid: dummyTokenPid,
+            tCURtDAIPairPid: tCURtDAIPairPid,
+            kETHtDAIPairPid: kETHtDAIPairPid
+        };
+    }
 
     const contractsAbi = {
         LP: dummyToken.abi

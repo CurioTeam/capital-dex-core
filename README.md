@@ -2,7 +2,7 @@
 
 Capital DEX - a decentralized exchange primarily for Security Car Tokens.
 
-# Features overview
+## Features overview
 
 - Liquidity pools and AMM mechanism, the ability to set the withdrawal of a part of the exchange fee to the team's wallet;
 - Liquidity mining mechanism: ERC-20 CGT (Curio Governance Token) tokens will be distributed, which will be issued separately and put on a special reserve contract;
@@ -12,14 +12,14 @@ Capital DEX - a decentralized exchange primarily for Security Car Tokens.
 - The admin and manager roles to manage the whitelist of users;
 - Upgradable functionality for whitelist of users.
 
-# Contracts overview
+## Contracts overview
 
 This repository contains contracts:
 - **Core Capital DEX contracts** - support liquidity pools, token pairs, AMM algorithm, control of user transactions and supported tokens using whitelists;
 - **Farming contracts** - work with the distribution of rewards (ERC-20 CGT - a token not relevant to this repository) for staking LP tokens of Capital DEX;
 - **DexWhitelist.sol** - the contract serves whitelists of users and tokens supported in Capital DEX, can work with whitelist of Security Token holders, supports upgradable functionality.
 
-# For Developers
+## For Developers
 
 ### Install dependencies
 
@@ -92,3 +92,15 @@ npm run set:uniswap
 ```sh
 npm run set:farming
 ```
+
+### Etherscan verification of contract
+
+Configure ```ETHERSCAN_API_KEY``` variable in ```.env``` file.
+
+```bash
+npx truffle run verify <contract_name>@<contract_address> --network <network_name>
+```
+
+## License
+
+[GPL-3.0](LICENSE)

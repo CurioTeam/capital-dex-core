@@ -20,6 +20,8 @@
     "set:whitelist": "npx truffle migrate --network local --f 6 --to 6",
     "set:uniswap": "npx truffle migrate --network local --f 7 --to 7",
     "set:farming": "npx truffle migrate --network local --f 8 --to 8",
+    "deploy:farmingV2": "npx truffle migrate --network local --f 9 --to 9",
+    "set:farmingV2": "npx truffle migrate --network local --f 10 --to 10",
     "test": "npx truffle compile --all && mocha --exit --recursive test --timeout 10000",
     "test:truffle": "npx truffle test --network test",
     "clean": "rm -rf ./build",
