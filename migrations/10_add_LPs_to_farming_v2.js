@@ -29,9 +29,10 @@ const CGTLINKPairAddress = "0x6456f0176d27265c8b530aacfc1fdadae3d60b04";
 const CGTUNIPairAddress = "0x7e6bace61d6f504e2ce186025309676f461d44b8";
 const CGT1INCHPairAddress = "0xe2817e5edf6f8260f24c3ace81a0fbd49f67765f";
 const CGTXCHFPairAddress = "0x88682534fcf23111bb1cfeec7d4f699b9c9bef90";
+const CGTCSCPairAddress = "0x7ca174ee6e7bc23e59747177244a44465f4e432b";
 
-const masterChefV2Address = "";
-const dummyTokenAddress = "";
+const masterChefV2Address = "0xE115e56a5a725E1fEbf17820E8fb5Ad8f17d5cF1";
+const dummyTokenAddress = "0x15eBf077A6245Ad9C0003A52BcD3C0f5a516740b";
 
 const dummyTokenPid = 0;
 const CGTwCT1PairPid = 1;
@@ -39,13 +40,15 @@ const CGTLINKPairPid = 2;
 const CGTUNIPairPid = 3;
 const CGT1INCHPairPid = 4;
 const CGTXCHFPairPid = 5;
+const CGTCSCPairPid = 6;
 
 const CGTwCT1AllocPoint = ether("1");
 const CGTLINKAllocPoint = ether("1");
 const CGTUNIAllocPoint = ether("1");
 const CGT1INCHAllocPoint = ether("1");
 const CGTXCHFAllocPoint = ether("1");
-const dummyAllocPoint = ether("10");     // 2/3 to DummyToken
+const CGTCSCAllocPoint = ether("1");
+const dummyAllocPoint = ether("12");     // 2/3 to DummyToken
 */
 
 module.exports = async function(deployer, network) {
@@ -64,13 +67,14 @@ module.exports = async function(deployer, network) {
         let CGTUNIPair = await IERC20.at(CGTUNIPairAddress);
         let CGT1INCHPair  = await IERC20.at(CGT1INCHPairAddress);
         let CGTXCHFPair = await IERC20.at(CGTXCHFPairAddress);
+        let CGTCSCPair = await IERC20.at(CGTCSCPairAddress);
         dummyToken = await IERC20.at(dummyTokenAddress);
 
         let masterChefV2 = await MasterChefV2.at(masterChefV2Address);
 
         await masterChefV2.add(
-            CGTwCTAllocPoint,
-            CGTwCTPair.address,
+            CGTwCT1AllocPoint,
+            CGTwCT1Pair.address,
             false,
         );
         console.log("added CGTwCTPair LP");
@@ -102,6 +106,13 @@ module.exports = async function(deployer, network) {
             false,
         );
         console.log("added CGTXCHFPair LP");
+
+        await masterChefV2.add(
+            CGTCSCAllocPoint,
+            CGTCSCPair.address,
+            false,
+        );
+        console.log("added CGTCSCPair LP");
 
         await masterChefV2.set(
             dummyTokenPid,
@@ -171,15 +182,17 @@ module.exports = async function(deployer, network) {
             CGTUNIPairAddress: CGTUNIPairAddress,
             CGT1INCHPairAddress: CGT1INCHPairAddress,
             CGTXCHFPairAddress: CGTXCHFPairAddress,
+            CGTCSCPairAddress: CGTCSCPairAddress,
         };
 
-        pid = {
+        const pid = {
             dummyTokenPid: dummyTokenPid,
             CGTwCT1PairPid: CGTwCT1PairPid,
             CGTLINKPairPid: CGTLINKPairPid,
             CGTUNIPairPid: CGTUNIPairPid,
             CGT1INCHPairPid: CGT1INCHPairPid,
             CGTXCHFPairPid: CGTXCHFPairPid,
+            CGTCSCPairPid: CGTCSCPairPid,
         };
     */
     } else {

@@ -1,0 +1,9 @@
+{
+  "dummyTokenAddress": "0x15eBf077A6245Ad9C0003A52BcD3C0f5a516740b",
+  "CGTwCT1PairAddress": "0xf67c990798221fdf41a4e77b6be2ce5c87df771e",
+  "CGTLINKPairAddress": "0x6456f0176d27265c8b530aacfc1fdadae3d60b04",
+  "CGTUNIPairAddress": "0x7e6bace61d6f504e2ce186025309676f461d44b8",
+  "CGT1INCHPairAddress": "0xe2817e5edf6f8260f24c3ace81a0fbd49f67765f",
+  "CGTXCHFPairAddress": "0x88682534fcf23111bb1cfeec7d4f699b9c9bef90",
+  "CGTCSCPairAddress": "0x7ca174ee6e7bc23e59747177244a44465f4e432b"
+}
