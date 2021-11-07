@@ -30,14 +30,6 @@ const config = {
       skipDryRun: true,
       network_id: '*'
     },
-    kovan: {
-      gasPrice: 1000 * 1000 * 1000, // 1 gwei
-      gasLimit: 10 * 1000 * 1000,
-      provider: getProvider(`wss://kovan.infura.io/ws/v3/${ process.env.INFURA_PROJECT_ID }`),
-      websockets: true,
-      skipDryRun: true,
-      network_id: '42'
-    },
     mainnet: {
       gasPrice: 75 * 1000 * 1000 * 1000, // 75 gwei
       gasLimit: 4 * 1000 * 1000, // 4,000,000
@@ -46,6 +38,27 @@ const config = {
       skipDryRun: false,
       network_id: '1'
     },
+    kovan: {
+      gasPrice: 1000 * 1000 * 1000, // 1 gwei
+      gasLimit: 10 * 1000 * 1000,
+      provider: getProvider(`wss://kovan.infura.io/ws/v3/${ process.env.INFURA_PROJECT_ID }`),
+      websockets: true,
+      skipDryRun: true,
+      network_id: '42'
+    },
+    rinkeby: {
+      gasPrice: 2 * 1e9, // 2 gwei
+      gasLimit: 16 * 1e6, // 16,000,000
+      provider: getProvider(`wss://rinkeby.infura.io/ws/v3/${ process.env.INFURA_PROJECT_ID }`),
+      websockets: true,
+      skipDryRun: true,
+      network_id: '4'
+    },
+    skale: {
+      provider: () => new HDWalletProvider(process.env.DEPLOYMENT_KEY, process.env.SKALE_RPC_URL),
+      gasPrice: 0,
+      network_id: "*"
+    }
   },
   mocha: {
     timeout: 10000
