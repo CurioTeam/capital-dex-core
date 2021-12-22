@@ -29,6 +29,12 @@ const rewardPerBlock = new BN("289351851851851851"); // 50k/mo for Mainnet (1 bl
 const initialReservoirSupply = ether(new BN(0)); // not used in migration
 */
 
+// SKALE Mainnet
+// const rewardTokenAddress = "0x134EbAb7883dFa9D04d20674dd8A8A995fB40Ced"; // SKALE Mainnet CGT
+// const dexWhitelistAddress = "0x1Da4933B725Afc12C6cCA017d71bBb06d5b096Ef";
+// const rewardPerBlock = new BN("0"); // 50k/mo for Mainnet (1 block - 15 seconds)
+// const initialReservoirSupply = ether(new BN(0)); // not used in migration
+
 const startBlock = 0;
 const bonusEndBlock = 0;
 
@@ -81,7 +87,7 @@ module.exports = async function(deployer, network) {
 
     // Testnet only
     // transfer RewardTokens to Reservoir
-    if (network !== "mainnet") {
+    if (network !== "mainnet" && network !== "skale_mainnet") {
         await rewardToken.transfer(
             reservoir.address,
             initialReservoirSupply

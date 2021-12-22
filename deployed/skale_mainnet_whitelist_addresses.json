@@ -1,0 +1,6 @@
+{
+  "dexWhitelist": "0xF2Ab668A5d6211F2a920EFD2e5126C105A2C6B6D",
+  "dexWhitelistProxy": "0x1Da4933B725Afc12C6cCA017d71bBb06d5b096Ef",
+  "proxyAdminContract": "0x22A66Da246A64Bd35c9121C187857Bae98779F14",
+  "proxyAdminAddress": "0x049a68E1c1D41400109C12B6bb40d3Dc66ec217f"
+}
