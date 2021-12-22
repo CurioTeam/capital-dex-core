@@ -12,11 +12,13 @@
   "scripts": {
     "compile": "npx truffle compile",
     "compile:all": "npx truffle compile --all",
+    "compile:multicall": "npx truffle compile --contracts_directory contracts/multicall",
     "deploy": "npx truffle migrate --network local",
     "deploy:mocks": "npx truffle migrate --network local --f 2 --to 2",
     "deploy:whitelist": "npx truffle migrate --network local --f 3 --to 3",
     "deploy:farming": "npx truffle migrate --network local --f 4 --to 4",
     "deploy:uniswap": "npx truffle migrate --network local --f 5 --to 5",
+    "deploy:multicall": "npx truffle compile --contracts_directory contracts/multicall && npx truffle migrate --network local --f 11 --to 11 --compile-none",
     "set:whitelist": "npx truffle migrate --network local --f 6 --to 6",
     "set:uniswap": "npx truffle migrate --network local --f 7 --to 7",
     "set:farming": "npx truffle migrate --network local --f 8 --to 8",

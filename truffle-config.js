@@ -54,10 +54,15 @@ const config = {
       skipDryRun: true,
       network_id: '4'
     },
-    skale: {
+    skale_testnet: {
       provider: () => new HDWalletProvider(process.env.DEPLOYMENT_KEY, process.env.SKALE_RPC_URL),
       gasPrice: 0,
-      network_id: "*"
+      network_id: '*'
+    },
+    skale_mainnet: {
+      provider: () => new HDWalletProvider(process.env.DEPLOYMENT_KEY, process.env.SKALE_RPC_URL),
+      gasPrice: 0,
+      network_id: '*'
     }
   },
   mocha: {
@@ -73,7 +78,18 @@ const config = {
         },
         evmVersion: "istanbul"
       }
+    },
+    /*
+    solc: { // For Multicall old version
+      version: '0.5.7',
+      settings: {
+        optimizer: {
+          enabled: true,
+          runs: 200
+        }
+      }
     }
+    */
   },
   plugins: [
     'truffle-plugin-verify'
