@@ -1,0 +1,5 @@
+{
+  "uniswapFactory": "0xef273d5eD7Bfa88aA9C94a6D4EfFFD196aE0f48a",
+  "uniswapRouter": "0xD5A9dC5c1BB41Cdee922c74606caF321FeB17e2b",
+  "dexWhitelistAddress": "0xB7092f6ED01f56BA19d78D225E26aDfa9974F9d5"
+}

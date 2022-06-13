@@ -59,6 +59,13 @@ const config = {
       gasPrice: 0,
       network_id: '*'
     },
+    skale_testnet_v2: {
+      provider: () => new HDWalletProvider(process.env.DEPLOYMENT_KEY, process.env.SKALE_RPC_URL),
+      gasPrice: 0,
+      network_id: '*',
+      networkCheckTimeout: 500000,
+      timeoutBlocks: 500000
+    },
     skale_mainnet: {
       provider: () => new HDWalletProvider(process.env.DEPLOYMENT_KEY, process.env.SKALE_RPC_URL),
       gasPrice: 0,

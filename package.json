@@ -12,7 +12,7 @@
   "scripts": {
     "compile": "npx truffle compile",
     "compile:all": "npx truffle compile --all",
-    "compile:multicall": "npx truffle compile --contracts_directory contracts/multicall",
+    "compile:multicall": "npx truffle compile --contracts_directory multicall",
     "deploy": "npx truffle migrate --network local",
     "deploy:mocks": "npx truffle migrate --network local --f 2 --to 2",
     "deploy:whitelist": "npx truffle migrate --network local --f 3 --to 3",

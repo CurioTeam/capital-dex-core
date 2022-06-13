@@ -35,6 +35,12 @@ const initialReservoirSupply = ether(new BN(0)); // not used in migration
 // const rewardPerBlock = new BN("0"); // 50k/mo for Mainnet (1 block - 15 seconds)
 // const initialReservoirSupply = ether(new BN(0)); // not used in migration
 
+// SKALE Testnet V2
+// const rewardTokenAddress = "0x026aAED0178856f93a4eB4Bec1ab2A86eFf29222"; // SKALE Testnet V2 CGT
+// const dexWhitelistAddress = "0xB7092f6ED01f56BA19d78D225E26aDfa9974F9d5";
+// const rewardPerBlock = new BN("0");
+// const initialReservoirSupply = ether(new BN(0)); // not used in migration
+
 const startBlock = 0;
 const bonusEndBlock = 0;
 
@@ -61,6 +67,7 @@ module.exports = async function(deployer, network) {
     console.log("masterChefV2 address: ", masterChefV2.address);
 
     // DummyToken deployment
+    /*
     await deployer.deploy(ERC20Mock,
         "DUMMY",
         "DUMMY",
@@ -69,13 +76,16 @@ module.exports = async function(deployer, network) {
     );
     let dummyToken = await ERC20Mock.deployed();
     console.log("dummyToken address: ", dummyToken.address);
+    */
 
     // add reward to DummyToken
+    /*
     await masterChefV2.add(
         ether("1"),
         dummyToken.address,
         false,
     );
+    */
 
     // Reservoir deployment
     await deployer.deploy(Reservoir,
@@ -87,12 +97,14 @@ module.exports = async function(deployer, network) {
 
     // Testnet only
     // transfer RewardTokens to Reservoir
+    /*
     if (network !== "mainnet" && network !== "skale_mainnet") {
         await rewardToken.transfer(
             reservoir.address,
             initialReservoirSupply
         );
     }
+    */
 
     // set Reservoir address to MasterChefV2
     await masterChefV2.setSushiReservoir(
@@ -108,7 +120,7 @@ module.exports = async function(deployer, network) {
     const contractsAddresses = {
         masterChefV2: masterChefV2.address,
         reservoir: reservoir.address,
-        dummyToken: dummyToken.address,
+        // dummyToken: dummyToken.address,
         rewardTokenAddress: rewardTokenAddress,
         dexWhitelistAddress: dexWhitelistAddress
     };
@@ -116,7 +128,7 @@ module.exports = async function(deployer, network) {
     const contractsAbi = {
         masterChefV2: masterChefV2.abi,
         reservoir: reservoir.abi,
-        dummyToken: dummyToken.abi
+        // dummyToken: dummyToken.abi
     };
 
     const deployDirectory = `${__dirname}/../deployed`;
