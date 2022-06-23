@@ -39,8 +39,8 @@ const config = {
       network_id: '1'
     },
     kovan: {
-      gasPrice: 1000 * 1000 * 1000, // 1 gwei
-      gasLimit: 10 * 1000 * 1000,
+      gasPrice: 3 * 1e9, // 3 gwei
+      gas: 10 * 1000 * 1000,
       provider: getProvider(`wss://kovan.infura.io/ws/v3/${ process.env.INFURA_PROJECT_ID }`),
       websockets: true,
       skipDryRun: true,
@@ -70,7 +70,15 @@ const config = {
       provider: () => new HDWalletProvider(process.env.DEPLOYMENT_KEY, process.env.SKALE_RPC_URL),
       gasPrice: 0,
       network_id: '*'
-    }
+    },
+    boba_rinkeby: {
+      provider: () => new HDWalletProvider(process.env.DEPLOYMENT_KEY, 'https://rinkeby.boba.network'),
+      gasPrice: 1e9, // 1 gwei
+      gas: 11 * 1e6, // 11,000,000
+      network_id: '28',
+      networkCheckTimeout: 500000,
+      timeoutBlocks: 500000
+    },
   },
   mocha: {
     timeout: 10000
@@ -84,6 +92,9 @@ const config = {
           runs: 200
         },
         evmVersion: "istanbul"
+        // metadata: {
+        //  bytecodeHash: "none" // For reduce bytecode size
+        // }
       }
     },
     /*
