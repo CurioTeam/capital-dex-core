@@ -5,15 +5,11 @@ const { deployProxy, admin } = require("@openzeppelin/truffle-upgrades");
 
 const DexWhitelist = artifacts.require("DexWhitelist");
 
-const owner = "0xB844C65F3E161061bA5D5dD8497B3C04B71c4c83";
-// const owner = "0x94ddecAFF0109b615e51C482e07312abce704042"; // Mainnet
+const owner = ""; // TODO: set
 
-const manager = "0x622153C82dA8E31fB6193c0F8c2768a360f3Db18";
-// const ADMIN = "0x5C064Bf2c4c3669068167E0DEF02D5318810BCE0"; // Mainnet
-// const ADMIN2 = "0x32be73f5FB6D4088F49C9Fb31f70D17be1154f53"; // Mainnet
+const manager = ""; // TODO: set
 
-const proxyAdmin = "0xE006A0BB078291e539B3c7b9c8A8aF7f29215600";
-// const proxyAdmin = "0x9F2012330Cc213e0E109Ef1f4F80C429924C5876"; // Mainnet
+const proxyAdmin = ""; // TODO: set
 
 module.exports = async function(deployer, network) {
     if (network === "test") return; // skip migrations if use test network
@@ -36,10 +32,6 @@ module.exports = async function(deployer, network) {
     await dexWhitelist.addAdmin(owner);
     await dexWhitelist.addManager(owner);
     await dexWhitelist.addManager(manager);
-
-    // Mainnet
-    // await dexWhitelist.addAdmin(ADMIN);
-    // await dexWhitelist.addAdmin(ADMIN2);
 
     // transfer owner permission
     await dexWhitelist.removeAdmin(curDeployer);

@@ -79,6 +79,14 @@ const config = {
       networkCheckTimeout: 500000,
       timeoutBlocks: 500000
     },
+    aurora_testnet: {
+      gasPrice: 0,
+      gas: 10 * 1e6, // 10,000,000
+      provider: () => new HDWalletProvider(process.env.DEPLOYMENT_KEY, 'https://testnet.aurora.dev'),
+      network_id: '1313161555',
+      networkCheckTimeout: 500000,
+      timeoutBlocks: 500000
+    },
   },
   mocha: {
     timeout: 10000
