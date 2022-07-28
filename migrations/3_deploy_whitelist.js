@@ -1,13 +1,8 @@
-const fs = require("fs");
-const path = require("path");
-
 const { deployProxy, admin } = require("@openzeppelin/truffle-upgrades");
 
 const DexWhitelist = artifacts.require("DexWhitelist");
 
 const owner = ""; // TODO: set
-
-const manager = ""; // TODO: set
 
 const proxyAdmin = ""; // TODO: set
 
@@ -24,14 +19,13 @@ module.exports = async function(deployer, network) {
     console.log("dexWhitelist address: ", dexWhitelist.address);
 
     // activate all WLs
-    await dexWhitelist.setWlActive(true, true, true, true);
+    await dexWhitelist.setWlActive(false, false, false, true);
 
     await dexWhitelist.addAdmin(curDeployer);
 
     // add new admin and manager
     await dexWhitelist.addAdmin(owner);
     await dexWhitelist.addManager(owner);
-    await dexWhitelist.addManager(manager);
 
     // transfer owner permission
     await dexWhitelist.removeAdmin(curDeployer);
@@ -39,22 +33,4 @@ module.exports = async function(deployer, network) {
 
     // transfer ProxyAdmin owner permission
     await admin.changeProxyAdmin(dexWhitelist.address, proxyAdmin)
-
-    // write addresses and ABI to files
-    const contractsAddresses = {
-        dexWhitelist: dexWhitelist.address,
-        proxyAdmin: proxyAdmin
-    };
-
-    const contractsAbi = {
-        dexWhitelist: dexWhitelist.abi
-    };
-
-    const deployDirectory = `${__dirname}/../deployed`;
-    if (!fs.existsSync(deployDirectory)) {
-        fs.mkdirSync(deployDirectory);
-    }
-
-    fs.writeFileSync(path.join(deployDirectory, `${network}_whitelist_addresses.json`), JSON.stringify(contractsAddresses, null, 2));
-    fs.writeFileSync(path.join(deployDirectory, `${network}_whitelist_abi.json`), JSON.stringify(contractsAbi, null, 2));
 };

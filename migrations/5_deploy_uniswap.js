@@ -1,6 +1,3 @@
-const fs = require("fs");
-const path = require("path");
-
 const {
     ether
 } = require("@openzeppelin/test-helpers");
@@ -67,24 +64,4 @@ module.exports = async function(deployer, network) {
     await uniswapFactory.setOwner(
         owner
     );
-
-    // write addresses and ABI to files
-    const contractsAddresses = {
-        uniswapFactory: uniswapFactory.address,
-        uniswapRouter: uniswapRouter.address,
-        dexWhitelistAddress: dexWhitelistAddress
-    };
-
-    const contractsAbi = {
-        uniswapFactory: uniswapFactory.abi,
-        uniswapRouter: uniswapRouter.abi
-    };
-
-    const deployDirectory = `${__dirname}/../deployed`;
-    if (!fs.existsSync(deployDirectory)) {
-        fs.mkdirSync(deployDirectory);
-    }
-
-    fs.writeFileSync(path.join(deployDirectory, `${network}_uniswap_addresses.json`), JSON.stringify(contractsAddresses, null, 2));
-    fs.writeFileSync(path.join(deployDirectory, `${network}_uniswap_abi.json`), JSON.stringify(contractsAbi, null, 2));
 };
