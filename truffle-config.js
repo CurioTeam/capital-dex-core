@@ -129,7 +129,8 @@ const config = {
     'truffle-plugin-verify'
   ],
   api_keys: {
-    etherscan: process.env.ETHERSCAN_API_KEY
+    etherscan: process.env.ETHERSCAN_API_KEY,
+    aurorascan: process.env.AURORASCAN_API_KEY
   }
 };
 
