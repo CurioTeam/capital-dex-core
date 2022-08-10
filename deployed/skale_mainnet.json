@@ -1,0 +1,19 @@
+{
+  "core": {
+    "UniswapV2Factory": "0xC36F5180B181f1b949E0Ff4d65B258e0987F443F",
+    "UniswapV2Router02": "0xB88AF58B511Cb378673A8709E42dA0bF013162fa",
+    "WETH": "0xD2Aaa00700000000000000000000000000000000"
+  },
+  "whitelist": {
+    "DexWhitelist": "0xF2Ab668A5d6211F2a920EFD2e5126C105A2C6B6D",
+    "DexWhitelistProxy": "0x1Da4933B725Afc12C6cCA017d71bBb06d5b096Ef",
+    "proxyAdminContract": "0x22A66Da246A64Bd35c9121C187857Bae98779F14",
+    "proxyAdminAddress": "0x049a68E1c1D41400109C12B6bb40d3Dc66ec217f"
+  },
+  "farming_v2": {
+    "MasterChefV2": "0x9D90A4E704232E3E393059Dc29d36Aa58b61e70b",
+    "Reservoir": "0xEF8E153cdbd532C0f9922C168E305B0707f7AC80",
+    "rewardToken": "0x134EbAb7883dFa9D04d20674dd8A8A995fB40Ced"
+  },
+  "Multicall": "0x211dA8112F2bD1c493a4F9158b9Aa1fa7342a8E8"
+}

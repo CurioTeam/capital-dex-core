@@ -1,0 +1,51 @@
+{
+  "core": {
+    "UniswapV2Factory": "0x03407772F5EBFB9B10Df007A2DD6FFf4EdE47B53",
+    "UniswapV2Router02": "0xDc6844cED486Ec04803f02F2Ee40BBDBEf615f21",
+    "WETH": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+  },
+  "whitelist": {
+    "DexWhitelist": "0xA04E2222d35891724069dF36ad138f16Ba6ACEbF",
+    "DexWhitelistProxy": "0xB2C747Aed3e54da0ad14D41B710CC40F88E51aA9",
+    "proxyAdminContract": "0xBc76EB8DC029994406F2F0d1a1a0FF2858EDc88D",
+    "proxyAdminAddress": "0x9F2012330Cc213e0E109Ef1f4F80C429924C5876"
+  },
+  "pairs": {
+    "UniswapV2Pair_ETH-CGT": "0x9a7c27F2BfD86001c0E9B5b9096564F64F37439E",
+    "UniswapV2Pair_ETH-CUR": "0x85323e31bCa3a8da8c5307671DDe878C4bBCDD36",
+    "UniswapV2Pair_CGT-DAI": "0xB9FcE07dB9737810CbC573E43ba700aA4655b6Bc",
+    "UniswapV2Pair_CGT-wCT1": "0xf67c990798221fdf41a4e77b6be2ce5c87df771e",
+    "UniswapV2Pair_CGT-LINK": "0x6456f0176d27265c8b530aacfc1fdadae3d60b04",
+    "UniswapV2Pair_CGT-UNI": "0x7e6bace61d6f504e2ce186025309676f461d44b8",
+    "UniswapV2Pair_CGT-1INCH": "0xe2817e5edf6f8260f24c3ace81a0fbd49f67765f",
+    "UniswapV2Pair_CGT-XCHF": "0x88682534fcf23111bb1cfeec7d4f699b9c9bef90",
+    "UniswapV2Pair_CGT-CSC": "0x7ca174ee6e7bc23e59747177244a44465f4e432b"
+  },
+  "farming": {
+    "MasterChef": "0xe8Cc9f640C55f3c5905FD2BBb63C53fb8A3A527d",
+    "Reservoir": "0x50d4b0118237d27E5faF42300e7c7385C91Df5bB",
+    "ERC20FixedSupplyMock_DUMMY": "0x7F98372A9852fd04B17a5617F18a9C7cC0F2c4DE",
+    "rewardToken": "0xF56b164efd3CFc02BA739b719B6526A6FA1cA32a",
+    "pids": {
+      "DUMMY": 0,
+      "ETH-CGT": 1,
+      "ETH-CUR": 2,
+      "CGT-DAI": 3
+    }
+  },
+  "farming_v2": {
+    "MasterChefV2": "0xE115e56a5a725E1fEbf17820E8fb5Ad8f17d5cF1",
+    "Reservoir": "0xB59748F8E960C67b4FE49cd6F90b1e1853ED2363",
+    "ERC20FixedSupplyMock_DUMMY": "0x15eBf077A6245Ad9C0003A52BcD3C0f5a516740b",
+    "rewardToken": "0xF56b164efd3CFc02BA739b719B6526A6FA1cA32a",
+    "pids": {
+      "DUMMY": 0,
+      "CGT-wCT1": 1,
+      "CGT-LINK": 2,
+      "CGT-UNI": 3,
+      "CGT-1INCH": 4,
+      "CGT-XCHF": 5,
+      "CGT-CSC": 6
+    }
+  }
+}

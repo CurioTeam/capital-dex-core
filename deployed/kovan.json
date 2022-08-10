@@ -1,0 +1,49 @@
+{
+  "core": {
+    "UniswapV2Factory": "0x8E0E163E9F66d639c448d1f5e0594CaC2558305e",
+    "UniswapV2Router02": "0x1D49fBafB74bC4dbcECD737741c1CEA96E7f8142",
+    "WETH": "0xd0A1E359811322d97991E03f863a0C30C2cF029C"
+  },
+  "whitelist": {
+    "DexWhitelistProxy": "0xC8A46b066BC148E08c80cfc6638Ea1bC1774538c",
+    "proxyAdminAddress": "0xE006A0BB078291e539B3c7b9c8A8aF7f29215600"
+  },
+  "tokens_mock": {
+    "ERC20FixedSupplyMock_tCGT": "0x2f4d4cFAb714e4573189B300293944673Fe0efF7",
+    "ERC20FixedSupplyMock_tCSC": "0x558FC7FA5471Ff77c56b9cB37207d099EAcE8379",
+    "ERC20FixedSupplyMock_tCUR": "0x42Bbfc77Ee4Ed0efC608634859a672D0cf49e1b4",
+    "ERC20FixedSupplyMock_tDAI": "0x330294de10bAd15f373BA7429Ab9685eDe43c13f",
+    "TokenFaucet": "0x12C626D2d63f5dEA9CF2c35fAeC1D8a9DBc6e040"
+  },
+  "pairs": {
+    "UniswapV2Pair_tCGT-tDAI": "0x56e25a8b226789daa0297c602807b28e2d14a100",
+    "UniswapV2Pair_tCSC-tDAI": "0x1f992899a69b273821c53ea886f605c911b93995",
+    "UniswapV2Pair_tCUR-tDAI": "0x83e1f7a2d21a54f846696d2b770ae293bdc2348e",
+    "UniswapV2Pair_kETH-tDAI": "0x2544df97c605184273367cfe513cd8f7c535c0d8"
+  },
+  "farming": {
+    "MasterChef": "0xAC83652E5BB9dbdBdb0e8DBb70d2230214fC203e",
+    "Reservoir": "0x41d31f45c4c4dC17d43c3a3fFFb49e6Cab4641a3",
+    "ERC20FixedSupplyMock_DUMMY": "0x055bb9f1ff0d624C5Df1117B08F517629B3c5540",
+    "rewardToken": "0x2f4d4cFAb714e4573189B300293944673Fe0efF7",
+    "pids": {
+      "DUMMY": 0,
+      "tCGT-tDAI": 1,
+      "tCSC-tDAI": 2,
+      "tCUR-tDAI": 3,
+      "kETH-tDAI": 4
+    }
+  },
+  "farming_v2": {
+    "MasterChefV2": "0xb2253eF8238C5EF57aFeb0ffC90Ae7825445FdF0",
+    "Reservoir": "0x0d1a9369cD42Af8ED42eE3E4DFf0a31Cb86B40fA",
+    "ERC20FixedSupplyMock_DUMMY": "0xf27f67Fa3bd61065BEd50254ccD84f2C518Ebdb4",
+    "rewardToken": "0x2f4d4cFAb714e4573189B300293944673Fe0efF7",
+    "pids": {
+      "DUMMY": 0,
+      "tCUR-tDAI": 1,
+      "kETH-tDAI": 2
+    }
+  }
+
+}
