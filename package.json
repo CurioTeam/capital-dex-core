@@ -1,7 +1,7 @@
 {
   "name": "capital-dex-core",
   "version": "1.1.0",
-  "description": "Capital Dex Core smart contracts",
+  "description": "Capital DEX smart contracts",
   "author": "Curio Capital AG",
   "license": "MIT",
   "files": [
@@ -13,21 +13,9 @@
     "compile": "npx truffle compile",
     "compile:all": "npx truffle compile --all",
     "compile:multicall": "npx truffle compile --contracts_directory multicall",
-    "deploy": "npx truffle migrate --network local",
-    "deploy:mocks": "npx truffle migrate --network local --f 2 --to 2",
-    "deploy:whitelist": "npx truffle migrate --network local --f 3 --to 3",
-    "deploy:farming": "npx truffle migrate --network local --f 4 --to 4",
-    "deploy:uniswap": "npx truffle migrate --network local --f 5 --to 5",
-    "deploy:multicall": "npx truffle compile --contracts_directory multicall && npx truffle migrate --network local --f 11 --to 11 --compile-none",
-    "set:whitelist": "npx truffle migrate --network local --f 6 --to 6",
-    "set:uniswap": "npx truffle migrate --network local --f 7 --to 7",
-    "set:farming": "npx truffle migrate --network local --f 8 --to 8",
-    "deploy:farmingV2": "npx truffle migrate --network local --f 9 --to 9",
-    "set:farmingV2": "npx truffle migrate --network local --f 10 --to 10",
     "test": "npx truffle compile --all && mocha --exit --recursive test --timeout 10000",
     "test:truffle": "npx truffle test --network test",
-    "clean": "rm -rf ./build",
-    "build": "npx truffle compile"
+    "clean": "rm -rf ./build"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^3.3.0",

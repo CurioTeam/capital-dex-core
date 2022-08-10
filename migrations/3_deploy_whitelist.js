@@ -6,6 +6,11 @@ const owner = ""; // TODO: set
 
 const proxyAdmin = ""; // TODO: set
 
+const isLiquidityWlActive = false; // TODO: set
+const isSwapWlActive = false; // TODO: set
+const isFarmWlActive = false; // TODO: set
+const isTokenWlActive = true; // TODO: set
+
 module.exports = async function(deployer, network) {
     if (network === "test") return; // skip migrations if use test network
 
@@ -16,10 +21,10 @@ module.exports = async function(deployer, network) {
     let dexWhitelist = await deployProxy(DexWhitelist, [], {
         unsafeAllowCustomTypes: true,
     });
-    console.log("dexWhitelist address: ", dexWhitelist.address);
+    console.log("DexWhitelistProxy: ", dexWhitelist.address);
 
     // activate all WLs
-    await dexWhitelist.setWlActive(false, false, false, true);
+    await dexWhitelist.setWlActive(isLiquidityWlActive, isSwapWlActive, isFarmWlActive, isTokenWlActive);
 
     await dexWhitelist.addAdmin(curDeployer);
 

@@ -11,7 +11,7 @@ const owner = ""; // TODO: set
 
 const feeToAddress = ""; // TODO: set
 
-const fee = ether("0.1");  // 10%
+const fee = ether("0.1");  // 10% TODO: set
 
 const dexWhitelistAddress = ""; // TODO: set
 
@@ -27,7 +27,7 @@ module.exports = async function(deployer, network) {
         curDeployer
     );
     let uniswapFactory = await UniswapFactory.deployed();
-    console.log("uniswapFactory address: ", uniswapFactory.address);
+    console.log("UniswapV2Factory: ", uniswapFactory.address);
 
     console.log("pairCodeHash: ", await uniswapFactory.pairCodeHash());
 
@@ -37,7 +37,7 @@ module.exports = async function(deployer, network) {
         wethAddress
     );
     let uniswapRouter = await UniswapRouter.deployed();
-    console.log("uniswapRouter address: ", uniswapRouter.address);
+    console.log("UniswapV2Router02: ", uniswapRouter.address);
 
     // set WL to UniswapFactory
     await uniswapFactory.setWhitelist(
