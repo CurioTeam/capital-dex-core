@@ -79,6 +79,14 @@ const config = {
       networkCheckTimeout: 500000,
       timeoutBlocks: 500000
     },
+    boba_mainnet: {
+      provider: () => new HDWalletProvider(process.env.DEPLOYMENT_KEY, 'https://mainnet.boba.network'),
+      gasPrice: 1e9, // 1 gwei
+      gas: 11 * 1e6, // 11,000,000
+      network_id: '288',
+      networkCheckTimeout: 500000,
+      timeoutBlocks: 500000
+    },
     aurora_testnet: {
       gasPrice: 0,
       gas: 10 * 1e6, // 10,000,000
