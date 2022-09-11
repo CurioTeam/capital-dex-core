@@ -1,0 +1,14 @@
+{
+  "core": {
+    "UniswapV2Factory": "0x0D0234C00495CEE1604778bDcDD5d6025223de65",
+    "UniswapV2Router02": "0xC657723A215114282B9304dd2A20Aa4d6a1bEB24",
+    "WETH": "0x440F4dAc53209030807A339062db28421b995919"
+  },
+  "whitelist": {
+    "DexWhitelist": "0x26FA2E430c1c252cD8f2ddB02801d4a4f30936fF",
+    "DexWhitelistProxy": "0xcFC8002c27985410F7a5Df76f418E5F1a460e1eb",
+    "proxyAdminContract": "0x50D87481c4cD14C7B20F996FD4441c7306a60677",
+    "proxyAdminAddress": "0xB6Eae17BE63040f58C24dA7A6246c1Ff1E9aCa25"
+  },
+  "Multicall": "0x715D0aE552FE5B04A0C3ee7078Ba2fbb804Cc2A3"
+}

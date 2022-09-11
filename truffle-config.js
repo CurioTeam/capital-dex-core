@@ -54,6 +54,16 @@ const config = {
       skipDryRun: true,
       network_id: '4'
     },
+    goerli: {
+      gasPrice: 1e9, // 1 gwei
+      gas: 15 * 1e6, // 15,000,000
+      provider: getProvider(`wss://goerli.infura.io/ws/v3/${ process.env.INFURA_PROJECT_ID }`),
+      websockets: true,
+      skipDryRun: true,
+      network_id: '5',
+      networkCheckTimeout: 500000,
+      timeoutBlocks: 500000
+    },
     skale_testnet: {
       provider: () => new HDWalletProvider(process.env.DEPLOYMENT_KEY, process.env.SKALE_RPC_URL),
       gasPrice: 0,
