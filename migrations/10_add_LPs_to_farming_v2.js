@@ -5,21 +5,21 @@ const {
 const IERC20 = artifacts.require("IERC20.sol");
 const MasterChefV2 = artifacts.require("MasterChefV2.sol");
 
-const masterChefV2Address = "0x3f52B3D865fEa5B5E7D4e814D05EDcBaDe2411Ee"; // TODO: set
+const masterChefV2Address = ""; // TODO: set
 
 // TODO: set
 const pools = [{
         pid: 1,
-        pair: "0x566982E84aCe98AAB455eB05A9942aE7A7587e6B",
+        pair: "",
         allocPoint: ether("1"),
     }, {
         pid: 2,
-        pair: "0x033C131F330957F590F101CF217f7E659b8d073e",
+        pair: "",
         allocPoint: ether("1"),
     }
 ];
 
-const dummyTokenAddress = "0xd7FbF9dc453Fe0B07458fd14843145f11254585e"; // TODO: set
+const dummyTokenAddress = ""; // TODO: set
 const dummyTokenPid = 0;
 const dummyAllocPoint = ether("4"); // 2/3 to DummyToken TODO: set
 
