@@ -23,5 +23,28 @@
     "UniswapV2Pair_CGT-wCT1": "0x566982E84aCe98AAB455eB05A9942aE7A7587e6B",
     "UniswapV2Pair_IXS-wCT1": "0xF5874bFFcAb9Ad8A72c62761eFb2e7e60EC2f14e"
   },
+  "farming": {
+    "MasterChef": "0xC0D56DDe2662060e0e73EbbCC0A8e379a5b4092b",
+    "Reservoir": "0x065B4775Cd2CD0E126fb979c204DF6cC4B66084B",
+    "ERC20FixedSupplyMock_DUMMY": "0x281A5582e0f1D14DE93009B185d8c821CD61d455",
+    "rewardToken": "0xd219F93eab932441eE2c5A41b3353f0497447DF2",
+    "pids": {
+      "DUMMY": 0,
+      "ETH-CGT": 1,
+      "ETH-CUR": 2,
+      "CGT-DAI": 3
+    }
+  },
+  "farming_v2": {
+    "MasterChefV2": "0x3f52B3D865fEa5B5E7D4e814D05EDcBaDe2411Ee",
+    "Reservoir": "0x875eA5762DDE24f6BeF50c18335fE263CF2Ad583",
+    "ERC20FixedSupplyMock_DUMMY": "0xd7FbF9dc453Fe0B07458fd14843145f11254585e",
+    "rewardToken": "0xd219F93eab932441eE2c5A41b3353f0497447DF2",
+    "pids": {
+      "DUMMY": 0,
+      "CGT-wCT1": 1,
+      "CGT-CSC": 2
+    }
+  },
   "Multicall": "0x715D0aE552FE5B04A0C3ee7078Ba2fbb804Cc2A3"
 }
