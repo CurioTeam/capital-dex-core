@@ -20,7 +20,8 @@ const rewardPerSec = new BN("0"); // in wei TODO: set
 // new BN("3858024691358024") - 10,000 tokens with 18 decimals / 30 days
 // new BN("19290123456790120") - 50,000 tokens with 18 decimals / 30 days
 
-const initialReservoirSupply = ether(new BN("0")); // TODO: set if needed
+const transferRewardTokens = false; // TODO: set true if needed transfer reward token to Reservoir
+const initialReservoirSupply = ether("0"); // TODO: set if needed
 
 const dummyDeployment = false; // TODO: set true if needed dummy token deployment
 
@@ -79,7 +80,7 @@ module.exports = async function(deployer, network) {
     console.log("Reservoir: ", reservoir.address);
 
     // transfer RewardTokens to Reservoir
-    if (initialReservoirSupply) {
+    if (transferRewardTokens) {
         console.log("Transferring initialReservoirSupply to Reservoir...");
         await rewardToken.transfer(
           reservoir.address,

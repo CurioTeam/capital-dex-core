@@ -11,5 +11,31 @@
     "proxyAdminContract": "0xd18523F8edAfc8b9d4fbb85235cEd133Ef54A1ef",
     "proxyAdminAddress": "0xE006A0BB078291e539B3c7b9c8A8aF7f29215600"
   },
+  "pairs": {
+    "UniswapV2Pair_CGT-ETH": "0xBe7994eF710613392d5c04da657955a4D9261712",
+    "UniswapV2Pair_CGT-DAI": "0x20f022DBDec395D824e0a9a88F72aBB3a0869384",
+    "UniswapV2Pair_DAI-ETH": "0xb33C967a07c515161644aEdE0E93bdc91480BC3f",
+    "UniswapV2Pair_CGT-wCT1": "0xfeFB3B2E35C5731a89CaDadC711E7576EF7eD9f3",
+    "UniswapV2Pair_CGT-CSC": "0xb8a72C815EB9f1550A89Df342c5A1Dd7D35B39E7",
+    "UniswapV2Pair_CGT-BOBA": "0x7E352479Ca90E813B0530D46F0dC00DF050f06d0"
+  },
+  "farming_v2_per_sec": {
+    "MasterChefV2PerSec": "0xDeD6a71A65b0E771404df56ad66f7F29217ae13E",
+    "Reservoir": "0x5161a0f846a65887C2624b2aB431ea9A2EE72e1e",
+    "rewardToken": "0x9a8cc2c27d79B5DBF22Bba8Be44bbd5953fc6b1D",
+    "pids": {
+      "CGT-DAI": 0,
+      "CGT-BOBA": 1
+    }
+  },
+  "farming_v2_per_sec-BOBA": {
+    "MasterChefV2PerSec": "0xA6fd1dd45c2BAEAa4bC4e96638540747339Ee55d",
+    "Reservoir": "0xe1ddbF0308432B346415095D5fB146717037A6FE",
+    "rewardToken": "0xC8d57314019195c343f54b84132B5D4E88E3ccDC",
+    "pids": {
+      "CGT-DAI": 0,
+      "CGT-BOBA": 1
+    }
+  },
   "Multicall": "0xCf65239F3622bCc03dB4Ea324EF00A2a1FA25989"
 }
