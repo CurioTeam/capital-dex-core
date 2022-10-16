@@ -10,5 +10,34 @@
     "proxyAdminContract": "0xDfCe72b526A9F0426CDEffA54AF05a20A47ef15A",
     "proxyAdminAddress": "0xE006A0BB078291e539B3c7b9c8A8aF7f29215600"
   },
+  "tokens_mock": {
+    "ERC20FixedSupplyMock_AURORA": "0xdDFC0e99B794B8d15dE4BB39F5dce0928c282ECA"
+  },
+  "pairs": {
+    "UniswapV2Pair_CGT-ETH": "0x2175bCEeECB4A98bFF346Ef8913a0b4086fCDe77",
+    "UniswapV2Pair_CGT-DAI": "0x48C5D6199B5f5309aF10ECe77A5B76e3be647b39",
+    "UniswapV2Pair_DAI-ETH": "0xF570B925F9E9266f2e10EB4072A212D6c3Fde7dC",
+    "UniswapV2Pair_CGT-wCT1": "0xe5589A2E5167012819C1bF52FeF57646068042fB",
+    "UniswapV2Pair_CGT-CSC": "0xb10A73Ac9D9008fFE346EDaeFf135ec220Fdb7a9",
+    "UniswapV2Pair_CGT-AURORA": "0x7281291F560fb9BC3abb6d31df7c7e7bD6500548"
+  },
+  "farming_v2": {
+    "MasterChefV2": "0xE62f44dd13E16B40477A3782C85b892b21247d76",
+    "Reservoir": "0xeEC7549fA6bD71F6491e216e1aDa8a9E85Abc929",
+    "rewardToken": "0xCE50714532b8d139C8A619CCC6617160d9314DF1",
+    "pids": {
+      "CGT-DAI": 0,
+      "CGT-AURORA": 1
+    }
+  },
+  "farming_v2-AURORA": {
+    "MasterChefV2": "0x065B862dfac9000886C6e9498b230F8CEaF6C8E0",
+    "Reservoir": "0x82b91837fCb628B012104ABb1232C5F9a9Bd8214",
+    "rewardToken": "0xdDFC0e99B794B8d15dE4BB39F5dce0928c282ECA",
+    "pids": {
+      "CGT-DAI": 0,
+      "CGT-AURORA": 1
+    }
+  },
   "Multicall": "0xF8b94e51C35Eb37667D362CB8Ad1fE87874151fC"
 }
