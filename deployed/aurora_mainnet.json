@@ -10,5 +10,19 @@
     "proxyAdminContract": "0x1Da4933B725Afc12C6cCA017d71bBb06d5b096Ef",
     "proxyAdminAddress": "0x76DB42bfea6982159A9C58f076E82A33f44802A0"
   },
+  "pairs": {
+    "UniswapV2Pair_DAI-ETH": "0x3cE5fC68ee3cAd04e0a1575607184897D65ac7aC",
+    "UniswapV2Pair_CGT-DAI": "0xfA8Ff45590d3E6664344e5f3677a43f1dD5f7B91"
+  },
+  "farming_v2": {
+    "MasterChefV2": "0xB88AF58B511Cb378673A8709E42dA0bF013162fa",
+    "Reservoir": "0xc980253d019E991096eD7d12B9bC23d3f448202d",
+    "rewardToken": "0xcc84668Daae56F9f2ef907ce79c8ca0D4fDB12A7"
+  },
+  "farming_v2-AURORA": {
+    "MasterChefV2": "0xEF8E153cdbd532C0f9922C168E305B0707f7AC80",
+    "Reservoir": "0xB57eeefc8e1CBEd9265A3B63AcA88D791bc45df1",
+    "rewardToken": "0x8BEc47865aDe3B172A928df8f990Bc7f2A3b9f79"
+  },
   "Multicall": "0x211dA8112F2bD1c493a4F9158b9Aa1fa7342a8E8"
 }
