@@ -113,6 +113,14 @@ const config = {
       networkCheckTimeout: 500000,
       timeoutBlocks: 500000
     },
+    harmony_devnet: {
+      gasPrice: 30e9, // 30 gwei
+      gas: 10 * 1e6, // 10,000,000
+      provider: () => new HDWalletProvider(process.env.DEPLOYMENT_KEY, 'https://api.s0.ps.hmny.io'),
+      network_id: '1666900000',
+      networkCheckTimeout: 500000,
+      timeoutBlocks: 500000
+    },
   },
   mocha: {
     timeout: 10000
