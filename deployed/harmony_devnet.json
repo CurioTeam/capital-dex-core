@@ -22,5 +22,23 @@
     "UniswapV2Pair_CGT-CSC": "0x576CbFD84BCE0f5C822faFEA49DD82785B05DC3D",
     "UniswapV2Pair_CGT-wCT1": "0x30e32b5bD32d8025Ff66Ef7D2Dd3Fe3fdE21a9e2"
   },
+  "farming_v2_per_sec": {
+    "MasterChefV2PerSec": "0x33c9BD59c78404e443eD4688108dF9aA1B3546ee",
+    "Reservoir": "0xe308F589b3cEAeC8444E28317981CD4F51089DD7",
+    "rewardToken": "0x50D87481c4cD14C7B20F996FD4441c7306a60677",
+    "pids": {
+      "CGT-DAI": 0,
+      "CGT-ONE": 1
+    }
+  },
+  "farming_v2_per_sec-WONE": {
+    "MasterChefV2PerSec": "0x257164f7258c6A896d9CAb27e6fBE16622719F0F",
+    "Reservoir": "0x9dA76b51A7AE960A84D6E1DBf8A11b1C22876E3c",
+    "rewardToken": "0x26FA2E430c1c252cD8f2ddB02801d4a4f30936fF",
+    "pids": {
+      "CGT-DAI": 0,
+      "CGT-ONE": 1
+    }
+  },
   "Multicall": "0x715D0aE552FE5B04A0C3ee7078Ba2fbb804Cc2A3"
 }
