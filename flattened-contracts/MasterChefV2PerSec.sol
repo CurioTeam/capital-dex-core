@@ -564,10 +564,7 @@ abstract contract Ownable is Context {
 /*
  * Capital DEX
  *
- * Copyright ©️ 2020 Curio AG (Company Number FL-0002.594.728-9)
- * Incorporated and registered in Liechtenstein.
- *
- * Copyright ©️ 2020 Curio Capital AG (Company Number CHE-211.446.654)
+ * Copyright ©️ 2020 CurioDAO Association
  * Incorporated and registered in Zug, Switzerland.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -598,10 +595,7 @@ interface IReservoir {
 /*
  * Capital DEX
  *
- * Copyright ©️ 2020 Curio AG (Company Number FL-0002.594.728-9)
- * Incorporated and registered in Liechtenstein.
- *
- * Copyright ©️ 2020 Curio Capital AG (Company Number CHE-211.446.654)
+ * Copyright ©️ 2020 CurioDAO Association
  * Incorporated and registered in Zug, Switzerland.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -657,10 +651,7 @@ interface IDexWhitelist {
 /*
  * Capital DEX
  *
- * Copyright ©️ 2022 Curio AG (Company Number FL-0002.594.728-9)
- * Incorporated and registered in Liechtenstein.
- *
- * Copyright ©️ 2022 Curio Capital AG (Company Number CHE-211.446.654)
+ * Copyright ©️ 2022 CurioDAO Association
  * Incorporated and registered in Zug, Switzerland.
  *
  * This program is free software: you can redistribute it and/or modify

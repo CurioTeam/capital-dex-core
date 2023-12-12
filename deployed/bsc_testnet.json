@@ -1,0 +1,23 @@
+{
+  "core": {
+    "UniswapV2Factory": "0x6899043cF74F0493799ac1dEA3319b935E9C9957",
+    "UniswapV2Router02": "0x8F01Fad188e1f19c01869277aD376a98be327cfd",
+    "WBNB": "0x26FA2E430c1c252cD8f2ddB02801d4a4f30936fF",
+    "pairCodeHash": "0x84424bc72abdb8408bab30b254171536761a25c5afee8a7638d74cc6fbc6a1a2"
+  },
+  "whitelist": {
+    "DexWhitelist": "0x50D87481c4cD14C7B20F996FD4441c7306a60677",
+    "DexWhitelistProxy": "0xE28039D9148A31E0ce8EAd889732a555174dDF7E",
+    "proxyAdminContract": "0xcFC8002c27985410F7a5Df76f418E5F1a460e1eb",
+    "proxyAdminAddress": "0xB6Eae17BE63040f58C24dA7A6246c1Ff1E9aCa25"
+  },
+  "tokens_mock": {
+    "ERC20FixedSupplyMock_CGT": "0x29f4932E46fD2198e7089Af2a08a50C036337E6d",
+    "ERC20FixedSupplyMock_DAI": "0x3D525833328412473f9Abe22898616B46715f055"
+  },
+  "pairs": {
+    "UniswapV2Pair_BNB-CGT": "0xCc9e69aED706aC49EBC999755AaD9e9cEF429De4",
+    "UniswapV2Pair_CGT-DAI": "0x7d9345381284E43B36fFB911CfcEb3285C4B296f"
+  },
+  "Multicall": "0x715D0aE552FE5B04A0C3ee7078Ba2fbb804Cc2A3"
+}

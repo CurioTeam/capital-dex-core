@@ -3,10 +3,7 @@
 /*
  * Capital DEX
  *
- * Copyright ©️ 2020 Curio AG (Company Number FL-0002.594.728-9)
- * Incorporated and registered in Liechtenstein.
- *
- * Copyright ©️ 2020 Curio Capital AG (Company Number CHE-211.446.654)
+ * Copyright ©️ 2020 CurioDAO Association
  * Incorporated and registered in Zug, Switzerland.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -85,10 +82,7 @@ interface IUniswapV2Pair {
 /*
  * Capital DEX
  *
- * Copyright ©️ 2020 Curio AG (Company Number FL-0002.594.728-9)
- * Incorporated and registered in Liechtenstein.
- *
- * Copyright ©️ 2020 Curio Capital AG (Company Number CHE-211.446.654)
+ * Copyright ©️ 2020 CurioDAO Association
  * Incorporated and registered in Zug, Switzerland.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -139,10 +133,7 @@ library SafeMathUniswap {
 /*
  * Capital DEX
  *
- * Copyright ©️ 2020 Curio AG (Company Number FL-0002.594.728-9)
- * Incorporated and registered in Liechtenstein.
- *
- * Copyright ©️ 2020 Curio Capital AG (Company Number CHE-211.446.654)
+ * Copyright ©️ 2020 CurioDAO Association
  * Incorporated and registered in Zug, Switzerland.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -246,10 +237,7 @@ library UniswapV2Library {
 /*
  * Capital DEX
  *
- * Copyright ©️ 2020 Curio AG (Company Number FL-0002.594.728-9)
- * Incorporated and registered in Liechtenstein.
- *
- * Copyright ©️ 2020 Curio Capital AG (Company Number CHE-211.446.654)
+ * Copyright ©️ 2020 CurioDAO Association
  * Incorporated and registered in Zug, Switzerland.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -306,10 +294,7 @@ library TransferHelperExternal {
 /*
  * Capital DEX
  *
- * Copyright ©️ 2020 Curio AG (Company Number FL-0002.594.728-9)
- * Incorporated and registered in Liechtenstein.
- *
- * Copyright ©️ 2020 Curio Capital AG (Company Number CHE-211.446.654)
+ * Copyright ©️ 2020 CurioDAO Association
  * Incorporated and registered in Zug, Switzerland.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -430,10 +415,7 @@ interface IUniswapV2Router01 {
 /*
  * Capital DEX
  *
- * Copyright ©️ 2020 Curio AG (Company Number FL-0002.594.728-9)
- * Incorporated and registered in Liechtenstein.
- *
- * Copyright ©️ 2020 Curio Capital AG (Company Number CHE-211.446.654)
+ * Copyright ©️ 2020 CurioDAO Association
  * Incorporated and registered in Zug, Switzerland.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -501,10 +483,7 @@ interface IUniswapV2Router02 is IUniswapV2Router01 {
 /*
  * Capital DEX
  *
- * Copyright ©️ 2020 Curio AG (Company Number FL-0002.594.728-9)
- * Incorporated and registered in Liechtenstein.
- *
- * Copyright ©️ 2020 Curio Capital AG (Company Number CHE-211.446.654)
+ * Copyright ©️ 2020 CurioDAO Association
  * Incorporated and registered in Zug, Switzerland.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -558,10 +537,7 @@ interface IUniswapV2Factory {
 /*
  * Capital DEX
  *
- * Copyright ©️ 2020 Curio AG (Company Number FL-0002.594.728-9)
- * Incorporated and registered in Liechtenstein.
- *
- * Copyright ©️ 2020 Curio Capital AG (Company Number CHE-211.446.654)
+ * Copyright ©️ 2020 CurioDAO Association
  * Incorporated and registered in Zug, Switzerland.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -604,10 +580,7 @@ interface IERC20Uniswap {
 /*
  * Capital DEX
  *
- * Copyright ©️ 2020 Curio AG (Company Number FL-0002.594.728-9)
- * Incorporated and registered in Liechtenstein.
- *
- * Copyright ©️ 2020 Curio Capital AG (Company Number CHE-211.446.654)
+ * Copyright ©️ 2020 CurioDAO Association
  * Incorporated and registered in Zug, Switzerland.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -640,10 +613,7 @@ interface IWETH {
 /*
  * Capital DEX
  *
- * Copyright ©️ 2020 Curio AG (Company Number FL-0002.594.728-9)
- * Incorporated and registered in Liechtenstein.
- *
- * Copyright ©️ 2020 Curio Capital AG (Company Number CHE-211.446.654)
+ * Copyright ©️ 2020 CurioDAO Association
  * Incorporated and registered in Zug, Switzerland.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -701,10 +671,7 @@ interface IDexWhitelist {
 /*
  * Capital DEX
  *
- * Copyright ©️ 2020 Curio AG (Company Number FL-0002.594.728-9)
- * Incorporated and registered in Liechtenstein.
- *
- * Copyright ©️ 2020 Curio Capital AG (Company Number CHE-211.446.654)
+ * Copyright ©️ 2020 CurioDAO Association
  * Incorporated and registered in Zug, Switzerland.
  *
  * This program is free software: you can redistribute it and/or modify
