@@ -19,5 +19,14 @@
     "UniswapV2Pair_BNB-CGT": "0xCc9e69aED706aC49EBC999755AaD9e9cEF429De4",
     "UniswapV2Pair_CGT-DAI": "0x7d9345381284E43B36fFB911CfcEb3285C4B296f"
   },
+  "farming_v2": {
+    "MasterChefV2": "0x25299aDbB5a47C4bceB268458550313491749cde",
+    "Reservoir": "0x3287156320C77Fa278F154B759F7a9a48d450805",
+    "rewardToken": "0x29f4932E46fD2198e7089Af2a08a50C036337E6d",
+    "pids": {
+      "BNB-CGT": 0,
+      "CGT-DAI": 1
+    }
+  },
   "Multicall": "0x715D0aE552FE5B04A0C3ee7078Ba2fbb804Cc2A3"
 }
