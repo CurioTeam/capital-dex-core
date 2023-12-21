@@ -1,0 +1,15 @@
+{
+  "core": {
+    "UniswapV2Factory": "",
+    "UniswapV2Router02": "",
+    "WBNB": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+    "pairCodeHash": "0x84424bc72abdb8408bab30b254171536761a25c5afee8a7638d74cc6fbc6a1a2"
+  },
+  "whitelist": {
+    "DexWhitelist": "",
+    "DexWhitelistProxy": "",
+    "proxyAdminContract": "",
+    "proxyAdminAddress": ""
+  },
+  "Multicall": "0x211dA8112F2bD1c493a4F9158b9Aa1fa7342a8E8"
+}

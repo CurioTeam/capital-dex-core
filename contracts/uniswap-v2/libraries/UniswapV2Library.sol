@@ -1,10 +1,7 @@
 /*
  * Capital DEX
  *
- * Copyright ©️ 2020 Curio AG (Company Number FL-0002.594.728-9)
- * Incorporated and registered in Liechtenstein.
- *
- * Copyright ©️ 2020 Curio Capital AG (Company Number CHE-211.446.654)
+ * Copyright ©️ 2020 CurioDAO Association
  * Incorporated and registered in Zug, Switzerland.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -47,7 +44,7 @@ library UniswapV2Library {
                 hex'ff',
                 factory,
                 keccak256(abi.encodePacked(token0, token1)),
-                hex'068929976e9b11179f781aadb37dc33b6fc0d30a27419125438dab4d4d11418b' // init code hash
+                hex'84424bc72abdb8408bab30b254171536761a25c5afee8a7638d74cc6fbc6a1a2' // init code hash
             ))));
     }
 

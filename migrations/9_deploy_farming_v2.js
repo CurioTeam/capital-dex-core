@@ -20,6 +20,7 @@ const rewardPerBlock = new BN("0"); // in wei TODO: set
 // new BN("9.2592593e+15") - apr. 200k/mo for Kovan (1 block – 4 seconds)
 // new BN("289351851851851851") - 50k/mo for Goerli (1 block - 15 seconds)
 // new BN("289351851851851851") - 50k/mo for Mainnet (1 block - 15 seconds)
+// new BN("57870370370370370") - 50k/mo for BSC Testnet (1 block - 3 seconds)
 
 const transferRewardTokens = false; // TODO: set true if needed transfer reward token to Reservoir
 const initialReservoirSupply = ether(new BN("0")); // TODO: set if needed

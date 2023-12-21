@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 const path = require('path');
 
 dotenv.config({
-  path: path.resolve(__dirname, '.env'),
+  path: path.resolve(__dirname, '.env')
 });
 
 function getProvider(rpc) {
@@ -129,6 +129,24 @@ const config = {
       networkCheckTimeout: 500000,
       timeoutBlocks: 500000
     },
+    bsc_testnet: {
+      gasPrice: 5e9, // 5 gwei
+      gas: 15 * 1e6, // 15,000,000
+      provider: () => new HDWalletProvider(process.env.DEPLOYMENT_KEY, 'https://data-seed-prebsc-1-s1.bnbchain.org:8545'),
+      skipDryRun: true,
+      network_id: '97',
+      networkCheckTimeout: 500000,
+      timeoutBlocks: 500000
+    },
+    bsc_mainnet: {
+      gasPrice: 3e9, // 3 gwei
+      gas: 15 * 1e6, // 15,000,000
+      provider: () => new HDWalletProvider(process.env.DEPLOYMENT_KEY, 'https://bsc-dataseed.binance.org'),
+      skipDryRun: false,
+      network_id: '56',
+      networkCheckTimeout: 500000,
+      timeoutBlocks: 500000
+    }
   },
   mocha: {
     timeout: 10000
@@ -146,7 +164,7 @@ const config = {
         //  bytecodeHash: "none" // For reduce bytecode size
         // }
       }
-    },
+    }
     /*
     solc: { // For Multicall old version
       version: '0.5.7',
@@ -158,13 +176,36 @@ const config = {
       }
     }
     */
+    /*
+    solc: { // For WETH9 old version
+      version: '0.4.19',
+      settings: {
+        optimizer: {
+          enabled: false,
+          runs: 200
+        }
+      }
+    }
+    */
+    /*
+    solc: { // For WBNB old version
+      version: '0.4.18',
+      settings: {
+        optimizer: {
+          enabled: false,
+          runs: 200
+        }
+      }
+    }
+    */
   },
   plugins: [
     'truffle-plugin-verify'
   ],
   api_keys: {
     etherscan: process.env.ETHERSCAN_API_KEY,
-    aurorascan: process.env.AURORASCAN_API_KEY
+    aurorascan: process.env.AURORASCAN_API_KEY,
+    bscscan: process.env.BSCSCAN_API_KEY
   }
 };
 
