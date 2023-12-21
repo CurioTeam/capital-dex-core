@@ -139,7 +139,7 @@ const config = {
       timeoutBlocks: 500000
     },
     bsc_mainnet: {
-      gasPrice: 5e9, // 5 gwei
+      gasPrice: 3e9, // 3 gwei
       gas: 15 * 1e6, // 15,000,000
       provider: () => new HDWalletProvider(process.env.DEPLOYMENT_KEY, 'https://bsc-dataseed.binance.org'),
       skipDryRun: false,
