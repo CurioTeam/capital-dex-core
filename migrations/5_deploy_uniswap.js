@@ -39,29 +39,35 @@ module.exports = async function(deployer, network) {
     let uniswapRouter = await UniswapRouter.deployed();
     console.log("UniswapV2Router02: ", uniswapRouter.address);
 
-    // set WL to UniswapFactory
+    console.log("Setting whitelist for Factory...");
     await uniswapFactory.setWhitelist(
         dexWhitelistAddress
     );
+    console.log("Whitelist have been set");
 
-    // set feeTo in UniswapFactory
+    console.log("Setting feeTo address for Factory...");
     await uniswapFactory.setFeeTo(
         feeToAddress
     );
+    console.log("feeTo address have been set");
 
-    // set fee in UniswapFactory
+    console.log("Setting fee value for Factory...");
     await uniswapFactory.setFee(
         fee
     );
+    console.log("Fee value have been set");
 
-    // set router permission for UniswapRouter in UniswapFactory
+    console.log("Setting router permission for Factory...");
     await uniswapFactory.setRouterPermission(
         uniswapRouter.address,
         true
     );
+    console.log("Router permission have been set");
 
     // transfer owner permission
+    console.log("Transferring Factory ownership: ", owner);
     await uniswapFactory.setOwner(
         owner
     );
+    console.log("Ownership has been transferred");
 };

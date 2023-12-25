@@ -1,0 +1,148 @@
+{
+  "manifestVersion": "3.1",
+  "impls": {
+    "c7ddce9cce010555442e8e00eab5ef0171dfd7dea20641ed98fccb6deff98872": {
+      "address": "0xE28039D9148A31E0ce8EAd889732a555174dDF7E",
+      "txHash": "0x3b6e99f12dc76b33416dc6263ae8bc052d71f17fabc1b97856a08aab24f8be3f",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "initialized",
+            "type": "t_bool",
+            "src": "../@openzeppelin/contracts-ethereum-package/contracts/Initializable.sol:21"
+          },
+          {
+            "contract": "Initializable",
+            "label": "initializing",
+            "type": "t_bool",
+            "src": "../@openzeppelin/contracts-ethereum-package/contracts/Initializable.sol:26"
+          },
+          {
+            "contract": "Initializable",
+            "label": "______gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "../@openzeppelin/contracts-ethereum-package/contracts/Initializable.sol:61"
+          },
+          {
+            "contract": "ContextUpgradeSafe",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "../@openzeppelin/contracts-ethereum-package/contracts/GSN/Context.sol:37"
+          },
+          {
+            "contract": "OwnableUpgradeSafe",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "../@openzeppelin/contracts-ethereum-package/contracts/access/Ownable.sol:18"
+          },
+          {
+            "contract": "OwnableUpgradeSafe",
+            "label": "__gap",
+            "type": "t_array(t_uint256)49_storage",
+            "src": "../@openzeppelin/contracts-ethereum-package/contracts/access/Ownable.sol:78"
+          },
+          {
+            "contract": "Administrated",
+            "label": "admins",
+            "type": "t_struct(AddressSet)14562_storage",
+            "src": "whitelist/traits/Administrated.sol:37"
+          },
+          {
+            "contract": "Managed",
+            "label": "managers",
+            "type": "t_struct(AddressSet)14562_storage",
+            "src": "whitelist/traits/Managed.sol:37"
+          },
+          {
+            "contract": "Pausable",
+            "label": "_paused",
+            "type": "t_bool",
+            "src": "whitelist/traits/Pausable.sol:34"
+          },
+          {
+            "contract": "DexWhitelist",
+            "label": "controller",
+            "type": "t_contract(ICarTokenController)12370",
+            "src": "whitelist/DexWhitelist.sol:39"
+          },
+          {
+            "contract": "DexWhitelist",
+            "label": "investors",
+            "type": "t_mapping(t_bytes32,t_struct(Investor)11690_storage)",
+            "src": "whitelist/DexWhitelist.sol:49"
+          },
+          {
+            "contract": "DexWhitelist",
+            "label": "keyOfInvestor",
+            "type": "t_mapping(t_address,t_bytes32)",
+            "src": "whitelist/DexWhitelist.sol:50"
+          },
+          {
+            "contract": "DexWhitelist",
+            "label": "tokens",
+            "type": "t_mapping(t_address,t_bool)",
+            "src": "whitelist/DexWhitelist.sol:55"
+          },
+          {
+            "contract": "DexWhitelist",
+            "label": "isLiquidityWlActive",
+            "type": "t_bool",
+            "src": "whitelist/DexWhitelist.sol:65"
+          },
+          {
+            "contract": "DexWhitelist",
+            "label": "isSwapWlActive",
+            "type": "t_bool",
+            "src": "whitelist/DexWhitelist.sol:66"
+          },
+          {
+            "contract": "DexWhitelist",
+            "label": "isFarmWlActive",
+            "type": "t_bool",
+            "src": "whitelist/DexWhitelist.sol:67"
+          },
+          {
+            "contract": "DexWhitelist",
+            "label": "isTokenWlActive",
+            "type": "t_bool",
+            "src": "whitelist/DexWhitelist.sol:68"
+          }
+        ],
+        "types": {
+          "t_contract(ICarTokenController)12370": {
+            "label": "contract ICarTokenController"
+          },
+          "t_mapping(t_bytes32,t_struct(Investor)11690_storage)": {
+            "label": "mapping(bytes32 => struct DexWhitelist.Investor)"
+          },
+          "t_mapping(t_address,t_bytes32)": {
+            "label": "mapping(address => bytes32)"
+          },
+          "t_mapping(t_address,t_bool)": {
+            "label": "mapping(address => bool)"
+          },
+          "t_bool": {
+            "label": "bool"
+          },
+          "t_struct(AddressSet)14562_storage": {
+            "label": "struct EnumerableSet.AddressSet"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          }
+        }
+      }
+    }
+  },
+  "admin": {
+    "address": "0xCDdDB1e590321fadE740e5d4F2e899a4EE2885f1",
+    "txHash": "0x5bdb83b265a6dc3d9353c077fe262e39ffa04ccc96bd7c18ca7770aeaffa4928"
+  }
+}

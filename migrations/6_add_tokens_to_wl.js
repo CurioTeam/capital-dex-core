@@ -15,9 +15,10 @@ module.exports = async function(deployer, network) {
 
     let dexWhitelist = await DexWhitelist.at(dexWhitelistProxyAddress);
 
-    // add tokens to whitelist
+    console.log("Adding token to whitelist...");
     await dexWhitelist.setTokenAddressesActive(
         tokensAddresses,
         tokensActiveStatuses,
     );
+    console.log("Tokens have been added");
 };
