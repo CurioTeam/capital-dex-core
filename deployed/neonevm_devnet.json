@@ -18,5 +18,14 @@
     "UniswapV2Pair_NEON-CGT": "0x060A5e9c268Ee6Ed94A909c2A8263326483fafBe",
     "UniswapV2Pair_CGT-USDT": "0xe937c697B55128dA35E3bA77Dd011E2FDE752c5f"
   },
+  "farming_v2_per_sec": {
+    "MasterChefV2PerSec": "0xFf98b9B26eb1d9Ba34946255f6fC7730b36213E1",
+    "Reservoir": "0xF7fCC9E84cB5631faFaa0Bf7fACF31aCd6f509b5",
+    "rewardToken": "0x02F61a069c53dE8CD0aD9BA3c94ce87a22923E54",
+    "pids": {
+      "NEON-CGT": 0,
+      "CGT-USDT": 1
+    }
+  },
   "Multicall": "0xcFC8002c27985410F7a5Df76f418E5F1a460e1eb"
 }
