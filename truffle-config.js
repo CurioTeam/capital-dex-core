@@ -146,6 +146,25 @@ const config = {
       network_id: '56',
       networkCheckTimeout: 500000,
       timeoutBlocks: 500000
+    },
+    neonevm_devnet: {
+      gasPrice: 80e9, // 80 galan
+      gas: 60000 * 1e6, // 60,000,000,000
+      provider: () => new HDWalletProvider(process.env.DEPLOYMENT_KEY, 'https://devnet.neonevm.org'),
+      network_id: '245022926',
+      networkCheckTimeout: 100000000,
+      timeoutBlocks: 100000000,
+      confirmations: 1
+    },
+    neonevm_mainnet: {
+      gasPrice: 705e9, // 705 galan
+      gas: 15 * 1e6, // 15,000,000 // TODO: set
+      provider: () => new HDWalletProvider(process.env.DEPLOYMENT_KEY, 'https://neon-proxy-mainnet.solana.p2p.org'),
+      skipDryRun: false,
+      network_id: '245022934',
+      networkCheckTimeout: 100000000,
+      timeoutBlocks: 100000000,
+      confirmations: 1
     }
   },
   mocha: {
