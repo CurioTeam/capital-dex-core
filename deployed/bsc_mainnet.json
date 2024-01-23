@@ -10,5 +10,10 @@
     "DexWhitelistProxy": "0x1Da4933B725Afc12C6cCA017d71bBb06d5b096Ef",
     "proxyAdminContract": "0x22A66Da246A64Bd35c9121C187857Bae98779F14"
   },
+  "farming_v2": {
+    "MasterChefV2": "0xB88AF58B511Cb378673A8709E42dA0bF013162fa",
+    "Reservoir": "0xc980253d019E991096eD7d12B9bC23d3f448202d",
+    "rewardToken": "0x3D04EDC843e74935C09F54cc4b2fe1870E347AC9"
+  },
   "Multicall": "0x211dA8112F2bD1c493a4F9158b9Aa1fa7342a8E8"
 }
