@@ -1,0 +1,14 @@
+{
+  "core": {
+    "UniswapV2Factory": "0x83240728cb18a3D9e6D5091844bC449e16006d79",
+    "UniswapV2Router02": "0xAF141A9F7E0627455bE33c7aF69bcDB77Ffb08C9",
+    "WNEON": "0x202C35e517Fa803B537565c40F0a6965D7204609",
+    "pairCodeHash": "0x84424bc72abdb8408bab30b254171536761a25c5afee8a7638d74cc6fbc6a1a2"
+  },
+  "whitelist": {
+    "DexWhitelist": "0xF2Ab668A5d6211F2a920EFD2e5126C105A2C6B6D",
+    "DexWhitelistProxy": "0x1Da4933B725Afc12C6cCA017d71bBb06d5b096Ef",
+    "proxyAdminContract": "0x22A66Da246A64Bd35c9121C187857Bae98779F14"
+  },
+  "Multicall": "0x211dA8112F2bD1c493a4F9158b9Aa1fa7342a8E8"
+}
