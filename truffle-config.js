@@ -157,8 +157,8 @@ const config = {
       confirmations: 1
     },
     neonevm_mainnet: {
-      gasPrice: 705e9, // 705 galan
-      gas: 15 * 1e6, // 15,000,000 // TODO: set
+      gasPrice: 170e9, // 170 galan
+      gas: 200 * 1e6, // 200,000,000
       provider: () => new HDWalletProvider(process.env.DEPLOYMENT_KEY, 'https://neon-proxy-mainnet.solana.p2p.org'),
       skipDryRun: false,
       network_id: '245022934',
