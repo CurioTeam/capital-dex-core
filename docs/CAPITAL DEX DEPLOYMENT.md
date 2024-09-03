@@ -67,10 +67,30 @@ npx truffle migrate --f 3 --to 3 --network {network}
 
 ### Step 4. Core contracts deployment
 
+Choose needed deployments scripts
+
+#### Deployment Factory and Router02
+
 Before executing migrations, it is necessary to review the migration code and set the required values.
 
 ```shell
 npx truffle migrate --f 5 --to 5 --network {network}
+```
+
+#### Deployment only Factory
+
+Before executing migrations, it is necessary to review the migration code and set the required values.
+
+```shell
+npx truffle migrate --f 12 --to 12 --network {network}
+```
+
+#### Deployment only Router04 (without ETH functionality)
+
+Before executing migrations, it is necessary to review the migration code and set the required values.
+
+```shell
+npx truffle migrate --f 20 --to 20 --network {network}
 ```
 
 ### Step 5. Farming deployment (MasterChefV2)
